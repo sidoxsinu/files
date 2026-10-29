@@ -1,0 +1,227 @@
+================================================================================
+PROGRAM 25: HOSPITAL STAFF INTERFACE
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement medical staff duties and salaries using interfaces:
+- Interface 1: MedicalStaff (performDuty(), calculateSalary())
+- Interface 2: EmergencyDuty (performEmergencyDuty())
+- Classes:
+  * Doctor implements MedicalStaff
+  * Nurse implements MedicalStaff
+  * EmergencyDoctor implements MedicalStaff, EmergencyDuty
+Demonstrate multiple interface implementation and polymorphic execution.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: interface MedicalStaff {
+2:     void performDuty();
+3:     double calculateSalary();
+4: }
+5: 
+6: interface EmergencyDuty {
+7:     void performEmergencyDuty();
+8: }
+9: 
+10: class Doctor implements MedicalStaff {
+11:     String name;
+12:     double salary;
+13: 
+14:     Doctor(String n, double s) { name = n; salary = s; }
+15:     public void performDuty() { System.out.println(name + " treats patients"); }
+16:     public double calculateSalary() { return salary; }
+17: }
+18: 
+19: class Nurse implements MedicalStaff {
+20:     String name;
+21:     double salary;
+22: 
+23:     Nurse(String n, double s) { name = n; salary = s; }
+24:     public void performDuty() { System.out.println(name + " cares for patients"); }
+25:     public double calculateSalary() { return salary; }
+26: }
+27: 
+28: class EmergencyDoctor implements MedicalStaff, EmergencyDuty {
+29:     String name;
+30:     double salary;
+31: 
+32:     EmergencyDoctor(String n, double s) { name = n; salary = s; }
+33:     public void performDuty() { System.out.println(name + " treats patients"); }
+34:     public double calculateSalary() { return salary; }
+35:     public void performEmergencyDuty() { System.out.println(name + " handles emergency"); }
+36: }
+37: 
+38: class Main {
+39:     public static void main(String[] args) {
+40:         MedicalStaff d = new Doctor("Arun", 50000);
+41:         MedicalStaff n = new Nurse("Anu", 25000);
+42:         EmergencyDoctor e = new EmergencyDoctor("Ravi", 60000);
+43: 
+44:         d.performDuty();
+45:         System.out.println("Salary: " + d.calculateSalary());
+46: 
+47:         n.performDuty();
+48:         System.out.println("Salary: " + n.calculateSalary());
+49: 
+50:         e.performDuty();
+51:         e.performEmergencyDuty();
+52:         System.out.println("Salary: " + e.calculateSalary());
+53:     }
+54: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: interface MedicalStaff {
+  - Core interface for all medical personnel.
+
+Line 2:     void performDuty();
+  - Method defining standard clinical duties.
+
+Line 3:     double calculateSalary();
+  - Method returning monthly salary.
+
+Line 4: }
+  - Closes MedicalStaff interface.
+
+Line 5: (Blank line)
+
+Line 6: interface EmergencyDuty {
+  - Specialized interface for handling critical emergency ward duties.
+
+Line 7:     void performEmergencyDuty();
+  - Method signature for emergency actions.
+
+Line 8: }
+  - Closes EmergencyDuty interface.
+
+Line 9: (Blank line)
+
+Line 10: class Doctor implements MedicalStaff {
+  - Regular Doctor class implementing MedicalStaff.
+
+Line 11:     String name;
+  - Doctor's name.
+
+Line 12:     double salary;
+  - Doctor's salary.
+
+Line 13: (Blank line)
+
+Line 14:     Doctor(String n, double s) { name = n; salary = s; }
+  - Constructor.
+
+Line 15:     public void performDuty() { System.out.println(name + " treats patients"); }
+  - Implements performDuty().
+
+Line 16:     public double calculateSalary() { return salary; }
+  - Implements calculateSalary().
+
+Line 17: }
+  - Closes Doctor class.
+
+Line 18: (Blank line)
+
+Line 19: class Nurse implements MedicalStaff {
+  - Nurse class implementing MedicalStaff.
+
+Line 20:     String name;
+  - Nurse's name.
+
+Line 21:     double salary;
+  - Nurse's salary.
+
+Line 22: (Blank line)
+
+Line 23:     Nurse(String n, double s) { name = n; salary = s; }
+  - Constructor.
+
+Line 24:     public void performDuty() { System.out.println(name + " cares for patients"); }
+  - Implements performDuty().
+
+Line 25:     public double calculateSalary() { return salary; }
+  - Implements calculateSalary().
+
+Line 26: }
+  - Closes Nurse class.
+
+Line 27: (Blank line)
+
+Line 28: class EmergencyDoctor implements MedicalStaff, EmergencyDuty {
+  - Demonstrates multiple interface implementation: implements both MedicalStaff AND EmergencyDuty.
+
+Line 29:     String name;
+  - Name.
+
+Line 30:     double salary;
+  - Salary.
+
+Line 31: (Blank line)
+
+Line 32:     EmergencyDoctor(String n, double s) { name = n; salary = s; }
+  - Constructor.
+
+Line 33:     public void performDuty() { System.out.println(name + " treats patients"); }
+  - Implements MedicalStaff.performDuty().
+
+Line 34:     public double calculateSalary() { return salary; }
+  - Implements MedicalStaff.calculateSalary().
+
+Line 35:     public void performEmergencyDuty() { System.out.println(name + " handles emergency"); }
+  - Implements EmergencyDuty.performEmergencyDuty().
+
+Line 36: }
+  - Closes EmergencyDoctor class.
+
+Line 37: (Blank line)
+
+Line 38: class Main {
+  - Driver class.
+
+Line 39:     public static void main(String[] args) {
+  - Main method.
+
+Line 40:         MedicalStaff d = new Doctor("Arun", 50000);
+  - Creates Doctor Arun.
+
+Line 41:         MedicalStaff n = new Nurse("Anu", 25000);
+  - Creates Nurse Anu.
+
+Line 42:         EmergencyDoctor e = new EmergencyDoctor("Ravi", 60000);
+  - Creates EmergencyDoctor Ravi.
+
+Line 43: (Blank line)
+
+Line 44:         d.performDuty();
+  - "Arun treats patients".
+
+Line 45:         System.out.println("Salary: " + d.calculateSalary());
+  - Salary: 50000.0.
+
+Line 46: (Blank line)
+
+Line 47:         n.performDuty();
+  - "Anu cares for patients".
+
+Line 48:         System.out.println("Salary: " + n.calculateSalary());
+  - Salary: 25000.0.
+
+Line 49: (Blank line)
+
+Line 50:         e.performDuty();
+  - "Ravi treats patients".
+
+Line 51:         e.performEmergencyDuty();
+  - "Ravi handles emergency".
+
+Line 52:         System.out.println("Salary: " + e.calculateSalary());
+  - Salary: 60000.0.
+
+Line 53:     }
+  - Closes main().
+
+Line 54: }
+  - Closes Main class.

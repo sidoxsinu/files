@@ -1,0 +1,166 @@
+================================================================================
+PROGRAM 26: BANKING CUSTOM EXCEPTION HANDLING
+FILE: BankAccount.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create user-defined custom exceptions in Java:
+- InsufficientBalanceException: Thrown when withdrawal exceeds available balance.
+- InvalidAmountException: Thrown when deposit or withdrawal amount is <= 0.
+Implement a BankAccount class with deposit() and withdraw() methods declaring
+these exceptions via 'throws', and handle them using try-catch-finally in main().
+
+================================================================================
+COMPLETE SOURCE CODE (BankAccount.java)
+================================================================================
+1: class InsufficientBalanceException extends Exception {
+2:     InsufficientBalanceException(String msg) { super(msg); }
+3: }
+4: 
+5: class InvalidAmountException extends Exception {
+6:     InvalidAmountException(String msg) { super(msg); }
+7: }
+8: 
+9: class BankAccount {
+10:     double balance = 5000;
+11: 
+12:     void deposit(double a) throws InvalidAmountException {
+13:         if (a <= 0) throw new InvalidAmountException("Invalid deposit amount");
+14:         balance += a;
+15:     }
+16: 
+17:     void withdraw(double a) throws InvalidAmountException, InsufficientBalanceException {
+18:         if (a <= 0) throw new InvalidAmountException("Invalid withdrawal amount");
+19:         if (a > balance) throw new InsufficientBalanceException("Insufficient balance");
+20:         balance -= a;
+21:     }
+22: 
+23:     public static void main(String[] args) {
+24:         BankAccount b = new BankAccount();
+25:         try {
+26:             b.deposit(1000);
+27:             b.withdraw(7000);
+28:         } catch (InvalidAmountException e) {
+29:             System.out.println(e.getMessage());
+30:         } catch (InsufficientBalanceException e) {
+31:             System.out.println(e.getMessage());
+32:         } finally {
+33:             System.out.println("Final Balance: " + b.balance);
+34:         }
+35:     }
+36: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class InsufficientBalanceException extends Exception {
+  - Creates a custom checked exception class by extending Java's built-in 'Exception' class.
+  - In Java, extending Exception creates a checked exception that must be either caught
+    with try-catch or declared with 'throws'.
+
+Line 2:     InsufficientBalanceException(String msg) { super(msg); }
+  - Constructor accepting an error message 'msg'.
+  - 'super(msg)': Passes the custom error description up to the Exception base class,
+    making it retrievable later using e.getMessage().
+
+Line 3: }
+  - Closes InsufficientBalanceException.
+
+Line 4: (Blank line)
+
+Line 5: class InvalidAmountException extends Exception {
+  - Second custom checked exception for non-positive or invalid monetary values.
+
+Line 6:     InvalidAmountException(String msg) { super(msg); }
+  - Constructor passing the error message to superclass Exception.
+
+Line 7: }
+  - Closes InvalidAmountException.
+
+Line 8: (Blank line)
+
+Line 9: class BankAccount {
+  - Defines the BankAccount class.
+
+Line 10:     double balance = 5000;
+  - Instance variable initialized with a starting balance of 5000.0.
+
+Line 11: (Blank line)
+
+Line 12:     void deposit(double a) throws InvalidAmountException {
+  - 'throws': Keyword in the method signature informing callers that this method may
+    throw an InvalidAmountException.
+
+Line 13:         if (a <= 0) throw new InvalidAmountException("Invalid deposit amount");
+  - 'throw': Keyword used to explicitly trigger an exception object.
+  - If deposit amount 'a' is 0 or negative, it halts execution and throws InvalidAmountException.
+
+Line 14:         balance += a;
+  - If valid (a > 0), increases the balance.
+
+Line 15:     }
+  - Closes deposit().
+
+Line 16: (Blank line)
+
+Line 17:     void withdraw(double a) throws InvalidAmountException, InsufficientBalanceException {
+  - Method declaring both checked exceptions using comma-separated list after 'throws'.
+
+Line 18:         if (a <= 0) throw new InvalidAmountException("Invalid withdrawal amount");
+  - Throws InvalidAmountException if withdrawal amount is <= 0.
+
+Line 19:         if (a > balance) throw new InsufficientBalanceException("Insufficient balance");
+  - Throws InsufficientBalanceException if withdrawal amount exceeds current balance.
+
+Line 20:         balance -= a;
+  - If both validations pass, deducts the amount from balance.
+
+Line 21:     }
+  - Closes withdraw().
+
+Line 22: (Blank line)
+
+Line 23:     public static void main(String[] args) {
+  - Main method.
+
+Line 24:         BankAccount b = new BankAccount();
+  - Instantiates bank account with initial balance 5000.
+
+Line 25:         try {
+  - 'try': Block enclosing code that might throw exceptions.
+
+Line 26:             b.deposit(1000);
+  - Valid deposit: balance becomes 6000.
+
+Line 27:             b.withdraw(7000);
+  - Invalid withdrawal: 7000 > 6000. Triggers InsufficientBalanceException!
+  - Control immediately jumps out of the try block to the matching catch block.
+
+Line 28:         } catch (InvalidAmountException e) {
+  - Catches InvalidAmountException if thrown.
+
+Line 29:             System.out.println(e.getMessage());
+  - Prints exception message.
+
+Line 30:         } catch (InsufficientBalanceException e) {
+  - 'catch': Catches the thrown InsufficientBalanceException.
+
+Line 31:             System.out.println(e.getMessage());
+  - Prints: "Insufficient balance".
+
+Line 32:         } finally {
+  - 'finally': Block that ALWAYS executes regardless of whether an exception occurred
+    or was caught. Used for cleanup and final state reporting.
+
+Line 33:             System.out.println("Final Balance: " + b.balance);
+  - Prints the balance: "Final Balance: 6000.0".
+
+Line 34:         }
+  - Closes finally block.
+
+Line 35:     }
+  - Closes main().
+
+Line 36: }
+  - Closes BankAccount class.

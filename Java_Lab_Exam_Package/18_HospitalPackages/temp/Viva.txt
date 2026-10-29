@@ -1,0 +1,2 @@
+Q1: Why is medical record number private?
+A1: To protect sensitive patient information from unauthorized direct external access.

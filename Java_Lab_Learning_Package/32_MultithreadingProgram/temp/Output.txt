@@ -1,0 +1,8 @@
+Thread 1: 1
+Thread 2: 1
+Thread 1: 2
+Thread 2: 2
+Thread 1: 3
+Thread 2: 3
+Arun withdrawn 700, Balance: 300
+Anu insufficient balance

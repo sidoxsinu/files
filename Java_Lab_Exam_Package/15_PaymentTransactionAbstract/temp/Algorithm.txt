@@ -1,0 +1,7 @@
+1. Start.
+2. Define abstract Payment with id, amount, abstract processPayment().
+3. Derive CreditCardPayment: 2% charge, 100 reward if >= 5000.
+4. Derive UPIPayment: 0.5% charge, 50 cashback if >= 1000.
+5. Derive NetBankingPayment: 20 charge, 100 discount if >= 5000.
+6. In main(), iterate through Payment[] array and process each payment.
+7. Stop.

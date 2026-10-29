@@ -1,0 +1,6 @@
+1. Start.
+2. In package bank.accounts, create Account with private, default, protected, public members.
+3. In package bank.services, create SavingsAccount extending Account (accesses protected balance and public name).
+4. In package bank.services, create BankService: access public members directly, and private/default via getters.
+5. In main(), demonstrate access and operations.
+6. Stop.

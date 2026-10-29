@@ -1,0 +1,7 @@
+Product: Phone
+Base Price: 20000.0
+Warranty: 2 years
+GST: 3600.0
+Storage: 128GB
+Insurance: 500.0
+Final Price: 24100.0

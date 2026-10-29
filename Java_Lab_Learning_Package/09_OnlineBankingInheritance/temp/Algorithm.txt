@@ -1,0 +1,7 @@
+1. Start.
+2. Create Account with balance, deposit(), withdraw(), display().
+3. Create SavingsAccount extending Account with interest().
+4. Create PremiumSavingsAccount extending SavingsAccount with loyaltyBenefit().
+5. Create CurrentAccount extending Account with checkMinimum() applying penalty.
+6. In main(), create objects and demonstrate each account operation.
+7. Stop.

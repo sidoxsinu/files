@@ -1,0 +1,244 @@
+================================================================================
+PROGRAM 30: HOSPITAL BILLING EXCEPTION HANDLING WITH FINALLY
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement comprehensive hospital billing with multiple modular methods declaring exceptions:
+- InvalidPatientException: If patient ID <= 0
+- InvalidChargeException: If any charge component is negative
+- PaymentException: If amount paid is less than total bill
+All methods propagate exceptions up to generateBill(), which is called in main()
+inside a try-catch-finally block.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: import java.util.Scanner;
+2: 
+3: class InvalidPatientException extends Exception {
+4:     InvalidPatientException(String msg) { super(msg); }
+5: }
+6: 
+7: class InvalidChargeException extends Exception {
+8:     InvalidChargeException(String msg) { super(msg); }
+9: }
+10: 
+11: class PaymentException extends Exception {
+12:     PaymentException(String msg) { super(msg); }
+13: }
+14: 
+15: class Main {
+16:     static void validatePatient(int id) throws InvalidPatientException {
+17:         if (id <= 0) throw new InvalidPatientException("Invalid patient ID");
+18:     }
+19: 
+20:     static double calculateBill(double t, double m, double r) throws InvalidChargeException {
+21:         if (t < 0 || m < 0 || r < 0) throw new InvalidChargeException("Negative charges not allowed");
+22:         return t + m + r;
+23:     }
+24: 
+25:     static void processPayment(double total, double paid) throws PaymentException {
+26:         if (paid < total) throw new PaymentException("Pending amount: " + (total - paid));
+27:         System.out.println("Balance returned: " + (paid - total));
+28:     }
+29: 
+30:     static void generateBill(int id, double t, double m, double r, double paid)
+31:             throws InvalidPatientException, InvalidChargeException, PaymentException {
+32:         validatePatient(id);
+33:         double total = calculateBill(t, m, r);
+34:         System.out.println("Total Bill: " + total);
+35:         processPayment(total, paid);
+36:     }
+37: 
+38:     public static void main(String[] args) {
+39:         Scanner sc = new Scanner(System.in);
+40:         try {
+41:             System.out.print("Patient ID: ");
+42:             int id = sc.nextInt();
+43:             System.out.print("Treatment: ");
+44:             double t = sc.nextDouble();
+45:             System.out.print("Medicine: ");
+46:             double m = sc.nextDouble();
+47:             System.out.print("Room: ");
+48:             double r = sc.nextDouble();
+49:             System.out.print("Amount paid: ");
+50:             double paid = sc.nextDouble();
+51: 
+52:             generateBill(id, t, m, r, paid);
+53: 
+54:         } catch (InvalidPatientException e) {
+55:             System.out.println(e.getMessage());
+56:         } catch (InvalidChargeException e) {
+57:             System.out.println(e.getMessage());
+58:         } catch (PaymentException e) {
+59:             System.out.println(e.getMessage());
+60:         } finally {
+61:             System.out.println("Billing process completed");
+62:             sc.close();
+63:         }
+64:     }
+65: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: import java.util.Scanner;
+  - Imports Scanner.
+
+Line 2: (Blank line)
+
+Line 3: class InvalidPatientException extends Exception {
+  - Custom checked exception for invalid patient ID.
+
+Line 4:     InvalidPatientException(String msg) { super(msg); }
+  - Constructor.
+
+Line 5: }
+  - Closes InvalidPatientException.
+
+Line 6: (Blank line)
+
+Line 7: class InvalidChargeException extends Exception {
+  - Custom checked exception for negative medical fees.
+
+Line 8:     InvalidChargeException(String msg) { super(msg); }
+  - Constructor.
+
+Line 9: }
+  - Closes InvalidChargeException.
+
+Line 10: (Blank line)
+
+Line 11: class PaymentException extends Exception {
+  - Custom checked exception for insufficient payment amount.
+
+Line 12:     PaymentException(String msg) { super(msg); }
+  - Constructor.
+
+Line 13: }
+  - Closes PaymentException.
+
+Line 14: (Blank line)
+
+Line 15: class Main {
+  - Defines Main class.
+
+Line 16:     static void validatePatient(int id) throws InvalidPatientException {
+  - Modular method to check patient ID validity.
+
+Line 17:         if (id <= 0) throw new InvalidPatientException("Invalid patient ID");
+  - Throws exception if patient ID is 0 or negative.
+
+Line 18:     }
+  - Closes validatePatient().
+
+Line 19: (Blank line)
+
+Line 20:     static double calculateBill(double t, double m, double r) throws InvalidChargeException {
+  - Calculates medical bill total: treatment 't', medicine 'm', room 'r'.
+
+Line 21:         if (t < 0 || m < 0 || r < 0) throw new InvalidChargeException("Negative charges not allowed");
+  - Throws exception if any charge is negative.
+
+Line 22:         return t + m + r;
+  - Returns sum of charges.
+
+Line 23:     }
+  - Closes calculateBill().
+
+Line 24: (Blank line)
+
+Line 25:     static void processPayment(double total, double paid) throws PaymentException {
+  - Reconciles paid amount with total bill.
+
+Line 26:         if (paid < total) throw new PaymentException("Pending amount: " + (total - paid));
+  - Throws PaymentException detailing the pending shortfall.
+
+Line 27:         System.out.println("Balance returned: " + (paid - total));
+  - Prints change to return to patient.
+
+Line 28:     }
+  - Closes processPayment().
+
+Line 29: (Blank line)
+
+Line 30:     static void generateBill(int id, double t, double m, double r, double paid)
+Line 31:             throws InvalidPatientException, InvalidChargeException, PaymentException {
+  - Orchestrator method declaring all three potential exceptions.
+
+Line 32:         validatePatient(id);
+  - Step 1: validates patient.
+
+Line 33:         double total = calculateBill(t, m, r);
+  - Step 2: computes total bill.
+
+Line 34:         System.out.println("Total Bill: " + total);
+  - Prints total bill.
+
+Line 35:         processPayment(total, paid);
+  - Step 3: processes payment.
+
+Line 36:     }
+  - Closes generateBill().
+
+Line 37: (Blank line)
+
+Line 38:     public static void main(String[] args) {
+  - Main method.
+
+Line 39:         Scanner sc = new Scanner(System.in);
+  - Creates Scanner.
+
+Line 40:         try {
+  - Try block guarding all user inputs and the billing pipeline.
+
+Line 41:             System.out.print("Patient ID: ");
+Line 42:             int id = sc.nextInt();
+Line 43:             System.out.print("Treatment: ");
+Line 44:             double t = sc.nextDouble();
+Line 45:             System.out.print("Medicine: ");
+Line 46:             double m = sc.nextDouble();
+Line 47:             System.out.print("Room: ");
+Line 48:             double r = sc.nextDouble();
+Line 49:             System.out.print("Amount paid: ");
+Line 50:             double paid = sc.nextDouble();
+  - Reads all billing inputs.
+
+Line 51: (Blank line)
+
+Line 52:             generateBill(id, t, m, r, paid);
+  - Executes full billing pipeline.
+
+Line 53: (Blank line)
+
+Line 54:         } catch (InvalidPatientException e) {
+Line 55:             System.out.println(e.getMessage());
+  - Catches invalid patient ID.
+
+Line 56:         } catch (InvalidChargeException e) {
+Line 57:             System.out.println(e.getMessage());
+  - Catches negative charge input.
+
+Line 58:         } catch (PaymentException e) {
+Line 59:             System.out.println(e.getMessage());
+  - Catches underpayment.
+
+Line 60:         } finally {
+  - Finally block guaranteed to execute.
+
+Line 61:             System.out.println("Billing process completed");
+  - Prints final audit message.
+
+Line 62:             sc.close();
+  - Closes Scanner.
+
+Line 63:         }
+  - Closes try-catch-finally.
+
+Line 64:     }
+  - Closes main().
+
+Line 65: }
+  - Closes Main class.

@@ -1,0 +1,5 @@
+Q1: What is the difference between start() and run()?
+A1: start() spawns a new thread and calls run(); calling run() directly executes in the caller thread.
+
+Q2: What is thread synchronization?
+A2: Restricting shared resource access so only one thread can execute a critical section at a time.

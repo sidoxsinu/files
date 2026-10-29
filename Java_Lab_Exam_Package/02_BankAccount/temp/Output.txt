@@ -1,0 +1,9 @@
+Account No: 101
+Name: Arun
+Balance: 5000.0
+Deposited: 1000.0
+Withdrawn: 2000.0
+Insufficient balance
+Account No: 101
+Name: Arun
+Balance: 4000.0

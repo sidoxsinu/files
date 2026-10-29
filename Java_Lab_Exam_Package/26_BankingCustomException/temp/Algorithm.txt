@@ -1,0 +1,7 @@
+1. Start.
+2. Create custom exceptions InsufficientBalanceException and InvalidAmountException extending Exception.
+3. In BankAccount:
+   - deposit(amount): throw InvalidAmountException if amount <= 0; else add to balance.
+   - withdraw(amount): throw InvalidAmountException if amount <= 0; throw InsufficientBalanceException if amount > balance; else deduct.
+4. In main(), use try-catch-finally. Catch exceptions and display final balance inside finally block.
+5. Stop.

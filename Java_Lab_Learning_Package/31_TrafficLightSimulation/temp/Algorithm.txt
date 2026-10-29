@@ -1,0 +1,9 @@
+1. Start.
+2. Read colour string from user.
+3. Convert colour to uppercase.
+4. Use switch:
+   - RED -> print "STOP"
+   - YELLOW -> print "READY"
+   - GREEN -> print "GO"
+   - default -> print "Invalid colour"
+5. Stop.

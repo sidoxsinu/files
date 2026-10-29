@@ -1,0 +1,261 @@
+================================================================================
+PROGRAM 11: EMPLOYEE PERFORMANCE ABSTRACT CLASS
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create an abstract class Employee with an abstract method calculateSalary().
+Implement subclasses:
+- Manager: Basic + 20% DA + 10% HRA + 5000 bonus
+- Developer: Basic + 20% DA + 10% HRA + 3000 bonus
+- Intern: Basic + 1000 stipend
+Demonstrate runtime polymorphism by storing objects in an Employee array.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: abstract class Employee {
+2:     int id;
+3:     String name;
+4:     double basic;
+5: 
+6:     Employee(int id, String name, double basic) {
+7:         this.id = id;
+8:         this.name = name;
+9:         this.basic = basic;
+10:     }
+11: 
+12:     abstract double calculateSalary();
+13: 
+14:     void display() {
+15:         System.out.println(name + " (" + id + ") Salary: " + calculateSalary());
+16:     }
+17: }
+18: 
+19: class Manager extends Employee {
+20:     Manager(int id, String name, double basic) {
+21:         super(id, name, basic);
+22:     }
+23: 
+24:     double calculateSalary() {
+25:         return basic + basic * 0.20 + basic * 0.10 + 5000;
+26:     }
+27: }
+28: 
+29: class Developer extends Employee {
+30:     Developer(int id, String name, double basic) {
+31:         super(id, name, basic);
+32:     }
+33: 
+34:     double calculateSalary() {
+35:         return basic + basic * 0.20 + basic * 0.10 + 3000;
+36:     }
+37: }
+38: 
+39: class Intern extends Employee {
+40:     Intern(int id, String name, double basic) {
+41:         super(id, name, basic);
+42:     }
+43: 
+44:     double calculateSalary() {
+45:         return basic + 1000;
+46:     }
+47: }
+48: 
+49: class Main {
+50:     public static void main(String[] args) {
+51:         Employee[] e = {
+52:             new Manager(1, "Arun", 40000),
+53:             new Developer(2, "Anu", 30000),
+54:             new Intern(3, "Ravi", 10000)
+55:         };
+56: 
+57:         for (Employee emp : e) {
+58:             emp.display();
+59:         }
+60:     }
+61: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: abstract class Employee {
+  - 'abstract class': A class declared with the 'abstract' keyword. It cannot be
+    directly instantiated (cannot do: new Employee()). It serves as a contract/base
+    for subclasses.
+
+Line 2:     int id;
+  - Employee ID.
+
+Line 3:     String name;
+  - Employee name.
+
+Line 4:     double basic;
+  - Basic salary.
+
+Line 5: (Blank line)
+
+Line 6:     Employee(int id, String name, double basic) {
+  - Constructor of the abstract class. Even though abstract classes cannot be
+    instantiated directly, their constructors are invoked by subclasses via super().
+
+Line 7:         this.id = id;
+  - Assigns ID.
+
+Line 8:         this.name = name;
+  - Assigns Name.
+
+Line 9:         this.basic = basic;
+  - Assigns Basic Salary.
+
+Line 10:    }
+  - Closes constructor.
+
+Line 11: (Blank line)
+
+Line 12:    abstract double calculateSalary();
+  - 'abstract' method: Has NO body (ends with a semicolon).
+  - Every non-abstract (concrete) subclass MUST provide its own implementation of
+    this method.
+
+Line 13: (Blank line)
+
+Line 14:    void display() {
+  - Concrete method in abstract class. Abstract classes can have both abstract
+    and regular methods.
+
+Line 15:        System.out.println(name + " (" + id + ") Salary: " + calculateSalary());
+  - Calls calculateSalary(). At runtime, the JVM uses dynamic method dispatch to
+    execute the subclass's version of calculateSalary().
+
+Line 16:    }
+  - Closes display().
+
+Line 17: }
+  - Closes Employee class.
+
+Line 18: (Blank line)
+
+Line 19: class Manager extends Employee {
+  - Concrete subclass Manager extending Employee.
+
+Line 20:     Manager(int id, String name, double basic) {
+  - Manager constructor.
+
+Line 21:         super(id, name, basic);
+  - Calls Employee constructor.
+
+Line 22:     }
+  - Closes constructor.
+
+Line 23: (Blank line)
+
+Line 24:    double calculateSalary() {
+  - Implements the abstract calculateSalary() method for Manager.
+
+Line 25:        return basic + basic * 0.20 + basic * 0.10 + 5000;
+  - Calculates Manager salary: basic + 20% DA + 10% HRA + 5000.
+
+Line 26:    }
+  - Closes calculateSalary().
+
+Line 27: }
+  - Closes Manager class.
+
+Line 28: (Blank line)
+
+Line 29: class Developer extends Employee {
+  - Concrete subclass Developer extending Employee.
+
+Line 30:     Developer(int id, String name, double basic) {
+  - Developer constructor.
+
+Line 31:         super(id, name, basic);
+  - Calls superclass constructor.
+
+Line 32:     }
+  - Closes constructor.
+
+Line 33: (Blank line)
+
+Line 34:    double calculateSalary() {
+  - Implements the abstract calculateSalary() method for Developer.
+
+Line 35:        return basic + basic * 0.20 + basic * 0.10 + 3000;
+  - Calculates Developer salary: basic + 20% DA + 10% HRA + 3000.
+
+Line 36:    }
+  - Closes calculateSalary().
+
+Line 37: }
+  - Closes Developer class.
+
+Line 38: (Blank line)
+
+Line 39: class Intern extends Employee {
+  - Concrete subclass Intern extending Employee.
+
+Line 40:     Intern(int id, String name, double basic) {
+  - Intern constructor.
+
+Line 41:         super(id, name, basic);
+  - Calls superclass constructor.
+
+Line 42:     }
+  - Closes constructor.
+
+Line 43: (Blank line)
+
+Line 44:    double calculateSalary() {
+  - Implements the abstract calculateSalary() method for Intern.
+
+Line 45:        return basic + 1000;
+  - Intern gets basic + 1000 stipend.
+
+Line 46:    }
+  - Closes calculateSalary().
+
+Line 47: }
+  - Closes Intern class.
+
+Line 48: (Blank line)
+
+Line 49: class Main {
+  - Driver class.
+
+Line 50:     public static void main(String[] args) {
+  - Main method.
+
+Line 51:         Employee[] e = {
+  - Declares an array of Employee superclass references. This enables polymorphism:
+    different object types stored under a unified base type.
+
+Line 52:             new Manager(1, "Arun", 40000),
+  - First array element: Manager object.
+
+Line 53:             new Developer(2, "Anu", 30000),
+  - Second array element: Developer object.
+
+Line 54:             new Intern(3, "Ravi", 10000)
+  - Third array element: Intern object.
+
+Line 55:         };
+  - Closes array initialization.
+
+Line 56: (Blank line)
+
+Line 57:         for (Employee emp : e) {
+  - Enhanced for-each loop: iterates through each Employee reference in the array.
+
+Line 58:             emp.display();
+  - Polymorphically calls display(), which in turn calls each subclass's specific calculateSalary().
+
+Line 59:         }
+  - Closes for loop.
+
+Line 60:     }
+  - Closes main().
+
+Line 61: }
+  - Closes Main class.

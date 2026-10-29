@@ -1,0 +1,8 @@
+Q1: What is a class and an object?
+A1: A class is a template or blueprint; an object is an instance of a class.
+
+Q2: Why use a parameterized constructor?
+A2: To initialize instance variables with custom values at the time of object creation.
+
+Q3: Why divide by 3.0 instead of 3?
+A3: To perform floating-point division and avoid losing decimal points.

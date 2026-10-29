@@ -1,0 +1,182 @@
+================================================================================
+PROGRAM 27: STUDENT RESULT MULTIPLE EXCEPTIONS
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Demonstrate handling multiple built-in exceptions in a single try-catch structure:
+- ArrayIndexOutOfBoundsException: Accessing invalid array index
+- ArithmeticException: Division by zero when calculating average
+- InputMismatchException: Non-numeric input provided via Scanner
+- IllegalArgumentException: Mark entered outside 0-100 range
+- finally block: Closes Scanner and prints completion message.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: import java.util.Scanner;
+2: import java.util.InputMismatchException;
+3: 
+4: class Main {
+5:     public static void main(String[] args) {
+6:         Scanner sc = new Scanner(System.in);
+7:         int[] marks = new int[5];
+8: 
+9:         try {
+10:             System.out.println("Enter 5 marks:");
+11:             for (int i = 0; i < 5; i++) {
+12:                 marks[i] = sc.nextInt();
+13:                 if (marks[i] < 0 || marks[i] > 100)
+14:                     throw new IllegalArgumentException("Marks must be between 0 and 100");
+15:             }
+16: 
+17:             System.out.print("Enter index to check: ");
+18:             int idx = sc.nextInt();
+19:             System.out.println("Mark: " + marks[idx]);
+20: 
+21:             int total = 0;
+22:             for (int m : marks) total += m;
+23: 
+24:             System.out.print("Enter count to divide: ");
+25:             int count = sc.nextInt();
+26:             int avg = total / count;
+27:             System.out.println("Total: " + total + " Average: " + avg);
+28: 
+29:         } catch (ArrayIndexOutOfBoundsException e) {
+30:             System.out.println("Invalid index");
+31:         } catch (ArithmeticException e) {
+32:             System.out.println("Division by zero");
+33:         } catch (InputMismatchException e) {
+34:             System.out.println("Enter numbers only");
+35:         } catch (IllegalArgumentException e) {
+36:             System.out.println(e.getMessage());
+37:         } finally {
+38:             System.out.println("Result processing completed");
+39:             sc.close();
+40:         }
+41:     }
+42: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: import java.util.Scanner;
+  - Imports Scanner class for reading terminal user input.
+
+Line 2: import java.util.InputMismatchException;
+  - Imports InputMismatchException from java.util package.
+
+Line 3: (Blank line)
+
+Line 4: class Main {
+  - Defines class Main.
+
+Line 5:     public static void main(String[] args) {
+  - Main method.
+
+Line 6:         Scanner sc = new Scanner(System.in);
+  - Creates Scanner connected to keyboard input (System.in).
+
+Line 7:         int[] marks = new int[5];
+  - Allocates array for 5 subject marks (valid indices 0 to 4).
+
+Line 8: (Blank line)
+
+Line 9:         try {
+  - Encloses input and calculation logic to catch runtime errors.
+
+Line 10:             System.out.println("Enter 5 marks:");
+  - Prompt.
+
+Line 11:             for (int i = 0; i < 5; i++) {
+  - Loops 5 times.
+
+Line 12:                 marks[i] = sc.nextInt();
+  - Reads next integer. If user enters text like "abc", throws InputMismatchException.
+
+Line 13:                 if (marks[i] < 0 || marks[i] > 100)
+  - Validates range [0, 100].
+
+Line 14:                     throw new IllegalArgumentException("Marks must be between 0 and 100");
+  - Explicitly throws unchecked IllegalArgumentException if invalid score entered.
+
+Line 15:             }
+  - Closes input loop.
+
+Line 16: (Blank line)
+
+Line 17:             System.out.print("Enter index to check: ");
+  - Prompt for array index.
+
+Line 18:             int idx = sc.nextInt();
+  - Reads index value.
+
+Line 19:             System.out.println("Mark: " + marks[idx]);
+  - Accesses marks[idx]. If idx < 0 or idx >= 5, JVM automatically throws ArrayIndexOutOfBoundsException!
+
+Line 20: (Blank line)
+
+Line 21:             int total = 0;
+  - Initializes accumulator.
+
+Line 22:             for (int m : marks) total += m;
+  - Sums up all 5 marks.
+
+Line 23: (Blank line)
+
+Line 24:             System.out.print("Enter count to divide: ");
+  - Prompt.
+
+Line 25:             int count = sc.nextInt();
+  - Reads divisor count.
+
+Line 26:             int avg = total / count;
+  - Integer division total / count. If count == 0, JVM throws ArithmeticException ("/ by zero")!
+
+Line 27:             System.out.println("Total: " + total + " Average: " + avg);
+  - Prints total and calculated average if no exceptions occurred.
+
+Line 28: (Blank line)
+
+Line 29:         } catch (ArrayIndexOutOfBoundsException e) {
+  - Catches invalid array index errors.
+
+Line 30:             System.out.println("Invalid index");
+  - Prints user-friendly message.
+
+Line 31:         } catch (ArithmeticException e) {
+  - Catches division by zero.
+
+Line 32:             System.out.println("Division by zero");
+  - Prints message.
+
+Line 33:         } catch (InputMismatchException e) {
+  - Catches non-integer input.
+
+Line 34:             System.out.println("Enter numbers only");
+  - Prints message.
+
+Line 35:         } catch (IllegalArgumentException e) {
+  - Catches out-of-range mark exception.
+
+Line 36:             System.out.println(e.getMessage());
+  - Prints custom error string.
+
+Line 37:         } finally {
+  - Always executes to ensure resource deallocation.
+
+Line 38:             System.out.println("Result processing completed");
+  - Confirmation message.
+
+Line 39:             sc.close();
+  - Closes Scanner to release system resource.
+
+Line 40:         }
+  - Closes finally block.
+
+Line 41:     }
+  - Closes main().
+
+Line 42: }
+  - Closes Main class.

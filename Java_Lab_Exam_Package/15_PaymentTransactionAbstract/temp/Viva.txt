@@ -1,0 +1,2 @@
+Q1: Why declare processPayment() as abstract?
+A1: Each payment method has unique fee/discount calculations.

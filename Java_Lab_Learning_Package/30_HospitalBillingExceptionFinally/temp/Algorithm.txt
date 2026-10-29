@@ -1,0 +1,6 @@
+1. Start.
+2. Create InvalidPatientException, InvalidChargeException, PaymentException.
+3. Implement validatePatient(), calculateBill(), processPayment().
+4. Call all in generateBill() with throws.
+5. In main(), catch exceptions and print "Billing process completed" in finally.
+6. Stop.

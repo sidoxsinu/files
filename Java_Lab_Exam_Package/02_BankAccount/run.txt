@@ -1,0 +1,2 @@
+javac BankAccount.java
+java BankAccount

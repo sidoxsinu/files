@@ -1,0 +1,212 @@
+================================================================================
+PROGRAM 20: EMPLOYEE PAYROLL PACKAGES & ACCESS SPECIFIERS
+FILES: Employee.java, Manager.java, PayrollManager.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create packages for employee payroll:
+- Package 'company.employee': Class Employee with:
+  * private: id, basic
+  * default: dept
+  * protected: grade
+  * public: name
+  * getters: getId(), getBasic()
+- Package 'company.payroll': Class Manager extends Employee
+  * Adds bonus = 5000, calculates salary = getBasic() + bonus
+- Package 'company.management': Class PayrollManager with main()
+  * Demonstrates access across three distinct packages.
+
+================================================================================
+FILE 1: Employee.java
+================================================================================
+1: package company.employee;
+2: 
+3: public class Employee {
+4:     private int id;
+5:     private double basic;
+6:     String dept = "CSE";
+7:     protected String grade = "A";
+8:     public String name;
+9: 
+10:     public Employee(int id, String name, double basic) {
+11:         this.id = id;
+12:         this.name = name;
+13:         this.basic = basic;
+14:     }
+15: 
+16:     public int getId() { return id; }
+17:     public double getBasic() { return basic; }
+18: }
+
+--- LINE-BY-LINE EXPLANATION (Employee.java) ---
+Line 1: package company.employee;
+  - Package declaration.
+
+Line 2: (Blank line)
+
+Line 3: public class Employee {
+  - Public class Employee.
+
+Line 4:     private int id;
+  - Private ID field.
+
+Line 5:     private double basic;
+  - Private basic salary field.
+
+Line 6:     String dept = "CSE";
+  - Default department field.
+
+Line 7:     protected String grade = "A";
+  - Protected performance grade field (accessible to subclasses).
+
+Line 8:     public String name;
+  - Public employee name field.
+
+Line 9: (Blank line)
+
+Line 10:    public Employee(int id, String name, double basic) {
+  - Constructor.
+
+Line 11:        this.id = id;
+  - Initializes id.
+
+Line 12:        this.name = name;
+  - Initializes name.
+
+Line 13:        this.basic = basic;
+  - Initializes basic salary.
+
+Line 14:    }
+  - Closes constructor.
+
+Line 15: (Blank line)
+
+Line 16:    public int getId() { return id; }
+  - Public getter for private id.
+
+Line 17:    public double getBasic() { return basic; }
+  - Public getter for private basic salary.
+
+Line 18: }
+  - Closes Employee class.
+
+================================================================================
+FILE 2: Manager.java
+================================================================================
+1: package company.payroll;
+2: 
+3: import company.employee.Employee;
+4: 
+5: public class Manager extends Employee {
+6:     double bonus = 5000;
+7: 
+8:     public Manager(int id, String name, double basic) {
+9:         super(id, name, basic);
+10:     }
+11: 
+12:     public double salary() { return getBasic() + bonus; }
+13: 
+14:     public void display() {
+15:         System.out.println("Name: " + name + " Grade: " + grade + " Salary: " + salary());
+16:     }
+17: }
+
+--- LINE-BY-LINE EXPLANATION (Manager.java) ---
+Line 1: package company.payroll;
+  - Package for payroll calculations.
+
+Line 2: (Blank line)
+
+Line 3: import company.employee.Employee;
+  - Imports Employee.
+
+Line 4: (Blank line)
+
+Line 5: public class Manager extends Employee {
+  - Manager extends Employee.
+
+Line 6:     double bonus = 5000;
+  - Manager bonus.
+
+Line 7: (Blank line)
+
+Line 8:     public Manager(int id, String name, double basic) {
+  - Constructor.
+
+Line 9:         super(id, name, basic);
+  - Calls Employee constructor.
+
+Line 10:    }
+  - Closes constructor.
+
+Line 11: (Blank line)
+
+Line 12:    public double salary() { return getBasic() + bonus; }
+  - Calculates total salary using public getter getBasic() + bonus.
+
+Line 13: (Blank line)
+
+Line 14:    public void display() {
+  - Display method.
+
+Line 15:        System.out.println("Name: " + name + " Grade: " + grade + " Salary: " + salary());
+  - Accesses public 'name', protected 'grade' directly, and calls salary().
+
+Line 16:    }
+  - Closes display().
+
+Line 17: }
+  - Closes Manager class.
+
+================================================================================
+FILE 3: PayrollManager.java
+================================================================================
+1: package company.management;
+2: 
+3: import company.payroll.Manager;
+4: 
+5: public class PayrollManager {
+6:     public static void main(String[] args) {
+7:         Manager m = new Manager(101, "Arun", 30000);
+8:         m.display();
+9:         System.out.println("ID via getter: " + m.getId());
+10:     }
+11: }
+
+--- LINE-BY-LINE EXPLANATION (PayrollManager.java) ---
+Line 1: package company.management;
+  - Package for company management.
+
+Line 2: (Blank line)
+
+Line 3: import company.payroll.Manager;
+  - Imports Manager class.
+
+Line 4: (Blank line)
+
+Line 5: public class PayrollManager {
+  - Driver class.
+
+Line 6:     public static void main(String[] args) {
+  - Main method.
+
+Line 7:         Manager m = new Manager(101, "Arun", 30000);
+  - Creates Manager: ID 101, Arun, Basic 30000.
+
+Line 8:         m.display();
+  - Displays: Name: Arun, Grade: A, Salary: 35000.0 (30000 + 5000).
+
+Line 9:         System.out.println("ID via getter: " + m.getId());
+  - Accesses private ID via getter: 101.
+
+Line 10:    }
+  - Closes main().
+
+Line 11: }
+  - Closes PayrollManager class.
+
+================================================================================
+COMPILATION & EXECUTION IN LINUX TERMINAL
+================================================================================
+javac -d . Employee.java Manager.java PayrollManager.java
+java company.management.PayrollManager

@@ -1,0 +1,2 @@
+Q1: Can an interface extend another interface?
+A1: Yes, using the extends keyword.

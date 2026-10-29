@@ -1,0 +1,6 @@
+1. Start.
+2. Create package college.student with Student (private id, default dept, protected cgpa, public name).
+3. Create package college.faculty with ResearchStudent extending Student (accesses protected cgpa directly).
+4. Create package college.admin with Admin (accesses private and default fields via getters/setters).
+5. In main(), update and display student details.
+6. Stop.

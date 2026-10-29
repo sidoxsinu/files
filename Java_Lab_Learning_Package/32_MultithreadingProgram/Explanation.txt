@@ -1,0 +1,257 @@
+================================================================================
+PROGRAM 32: MULTITHREADING WITH SYNCHRONIZATION
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement multithreading and thread synchronization in Java:
+- Part 1: Thread creation by extending Thread class. Create two threads (Thread 1, Thread 2)
+  that count numbers concurrently and demonstrate join().
+- Part 2: Thread synchronization using 'synchronized' methods. Create a shared Bank account
+  with balance 1000. Launch two concurrent Customer threads ("Arun" requesting 700,
+  "Anu" requesting 500) attempting to withdraw at the same time. The synchronized method
+  prevents race conditions and ensures mutual exclusion.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: class MyThread extends Thread {
+2:     String name;
+3: 
+4:     MyThread(String n) { name = n; }
+5: 
+6:     public void run() {
+7:         for (int i = 1; i <= 3; i++) {
+8:             System.out.println(name + ": " + i);
+9:             try { Thread.sleep(100); } catch (Exception e) {}
+10:         }
+11:     }
+12: }
+13: 
+14: class Bank {
+15:     int bal = 1000;
+16: 
+17:     synchronized void withdraw(String name, int amt) {
+18:         if (amt <= bal) {
+19:             try { Thread.sleep(100); } catch (Exception e) {}
+20:             bal -= amt;
+21:             System.out.println(name + " withdrawn " + amt + ", Balance: " + bal);
+22:         } else {
+23:             System.out.println(name + " insufficient balance");
+24:         }
+25:     }
+26: }
+27: 
+28: class Customer extends Thread {
+29:     Bank b;
+30:     int amt;
+31: 
+32:     Customer(String n, Bank b, int amt) {
+33:         super(n);
+34:         this.b = b;
+35:         this.amt = amt;
+36:     }
+37: 
+38:     public void run() {
+39:         b.withdraw(getName(), amt);
+40:     }
+41: }
+42: 
+43: class Main {
+44:     public static void main(String[] args) throws Exception {
+45:         MyThread t1 = new MyThread("Thread 1");
+46:         MyThread t2 = new MyThread("Thread 2");
+47:         t1.start();
+48:         t2.start();
+49:         t1.join();
+50:         t2.join();
+51: 
+52:         Bank bank = new Bank();
+53:         Customer c1 = new Customer("Arun", bank, 700);
+54:         Customer c2 = new Customer("Anu", bank, 500);
+55:         c1.start();
+56:         c2.start();
+57:     }
+58: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class MyThread extends Thread {
+  - Demonstrates creating a thread by extending the built-in 'java.lang.Thread' class.
+
+Line 2:     String name;
+  - Thread identifier name.
+
+Line 3: (Blank line)
+
+Line 4:     MyThread(String n) { name = n; }
+  - Constructor to initialize thread name.
+
+Line 5: (Blank line)
+
+Line 6:     public void run() {
+  - 'run()': The entry point for thread execution. Contains code executed by the thread.
+  - Must be declared 'public void' with no parameters.
+
+Line 7:         for (int i = 1; i <= 3; i++) {
+  - Loops 3 times.
+
+Line 8:             System.out.println(name + ": " + i);
+  - Prints thread name and loop index concurrently.
+
+Line 9:             try { Thread.sleep(100); } catch (Exception e) {}
+  - 'Thread.sleep(100)': Suspends thread execution for 100 milliseconds, allowing other
+    concurrent threads to execute and demonstrating interleaved execution.
+  - Requires try-catch because Thread.sleep() can throw InterruptedException.
+
+Line 10:        }
+  - Closes loop.
+
+Line 11:    }
+  - Closes run() method.
+
+Line 12: }
+  - Closes MyThread class.
+
+Line 13: (Blank line)
+
+Line 14: class Bank {
+  - Represents shared resource accessed concurrently by multiple threads.
+
+Line 15:     int bal = 1000;
+  - Shared account balance: initial funds Rs. 1000.
+
+Line 16: (Blank line)
+
+Line 17:     synchronized void withdraw(String name, int amt) {
+  - 'synchronized': Critical keyword for thread safety!
+  - When a thread enters a synchronized method, it acquires the intrinsic lock (monitor)
+    on the Bank object. No other thread can enter any synchronized method on the same
+    object until the lock is released.
+  - Eliminates Race Conditions!
+
+Line 18:         if (amt <= bal) {
+  - Checks if sufficient balance is available.
+
+Line 19:             try { Thread.sleep(100); } catch (Exception e) {}
+  - Artificial delay representing transaction processing time.
+
+Line 20:             bal -= amt;
+  - Deducts withdrawal from balance.
+
+Line 21:             System.out.println(name + " withdrawn " + amt + ", Balance: " + bal);
+  - Prints successful withdrawal message.
+
+Line 22:         } else {
+  - Executes if balance is insufficient.
+
+Line 23:             System.out.println(name + " insufficient balance");
+  - Alerts user.
+
+Line 24:         }
+  - Closes if-else block.
+
+Line 25:     }
+  - Closes synchronized withdraw() method and automatically releases the lock.
+
+Line 26: }
+  - Closes Bank class.
+
+Line 27: (Blank line)
+
+Line 28: class Customer extends Thread {
+  - Thread representing an active customer attempting to withdraw money.
+
+Line 29:     Bank b;
+  - Reference to the shared Bank object.
+
+Line 30:     int amt;
+  - Amount this customer wants to withdraw.
+
+Line 31: (Blank line)
+
+Line 32:     Customer(String n, Bank b, int amt) {
+  - Constructor.
+
+Line 33:         super(n);
+  - 'super(n)': Calls Thread class constructor to name this thread.
+
+Line 34:         this.b = b;
+  - Assigns shared bank reference.
+
+Line 35:         this.amt = amt;
+  - Assigns withdrawal amount.
+
+Line 36:     }
+  - Closes constructor.
+
+Line 37: (Blank line)
+
+Line 38:     public void run() {
+  - Executed when customer thread starts.
+
+Line 39:         b.withdraw(getName(), amt);
+  - 'getName()': Method inherited from Thread returning the thread name.
+  - Calls synchronized withdraw() on shared bank instance.
+
+Line 40:     }
+  - Closes run() method.
+
+Line 41: }
+  - Closes Customer class.
+
+Line 42: (Blank line)
+
+Line 43: class Main {
+  - Driver class.
+
+Line 44:     public static void main(String[] args) throws Exception {
+  - 'throws Exception': Allows main to propagate InterruptedException from join().
+
+Line 45:         MyThread t1 = new MyThread("Thread 1");
+  - Creates thread 1.
+
+Line 46:         MyThread t2 = new MyThread("Thread 2");
+  - Creates thread 2.
+
+Line 47:         t1.start();
+  - 'start()': Causes JVM to spawn a new native OS thread and call its run() method.
+  - (Calling run() directly would NOT start a new thread!).
+
+Line 48:         t2.start();
+  - Starts thread 2 concurrently.
+
+Line 49:         t1.join();
+  - 'join()': Causes the calling thread (main) to wait until thread t1 completes.
+
+Line 50:         t2.join();
+  - Causes main thread to wait until thread t2 completes.
+
+Line 51: (Blank line)
+
+Line 52:         Bank bank = new Bank();
+  - Creates the single SHARED Bank instance.
+
+Line 53:         Customer c1 = new Customer("Arun", bank, 700);
+  - First customer wants 700.
+
+Line 54:         Customer c2 = new Customer("Anu", bank, 500);
+  - Second customer wants 500. Total requested (1200) > Balance (1000).
+
+Line 55:         c1.start();
+  - Starts Arun's thread.
+
+Line 56:         c2.start();
+  - Starts Anu's thread.
+  - Because withdraw() is synchronized, only ONE customer can withdraw.
+  - The first to acquire lock withdraws, reducing balance to 300.
+  - The second finds balance (300) < requested (500) and prints "insufficient balance".
+  - Mutual exclusion ensures the account balance never goes negative!
+
+Line 57:     }
+  - Closes main().
+
+Line 58: }
+  - Closes Main class.

@@ -1,0 +1,5 @@
+Q1: What is hierarchical inheritance?
+A1: Multiple subclasses inheriting from a single superclass.
+
+Q2: What is method overriding?
+A2: Subclass providing a specific implementation for a method already defined in its superclass.

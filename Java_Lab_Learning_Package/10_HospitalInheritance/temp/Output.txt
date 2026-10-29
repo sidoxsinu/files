@@ -1,0 +1,3 @@
+Doctor: Arun Total: 55000.0
+Nurse: Anu Total: 26500.0
+Patient: Ravi Bill: 8000.0

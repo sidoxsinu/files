@@ -1,0 +1,5 @@
+1. Start.
+2. In shopping.product, create Product with private id, default category, protected price, public name.
+3. In shopping.order, create DiscountedProduct extending Product (accesses protected price directly).
+4. In shopping.order, create Order with main() to display order summary.
+5. Stop.

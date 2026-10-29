@@ -1,0 +1,8 @@
+1. Start.
+2. Read 5 marks into array.
+3. Throw IllegalArgumentException if mark < 0 or > 100.
+4. Access marks[idx] which may throw ArrayIndexOutOfBoundsException.
+5. Divide total by count which throws ArithmeticException if count is 0.
+6. Catch InputMismatchException, IllegalArgumentException, ArrayIndexOutOfBoundsException, ArithmeticException.
+7. Print "Result processing completed" in finally.
+8. Stop.

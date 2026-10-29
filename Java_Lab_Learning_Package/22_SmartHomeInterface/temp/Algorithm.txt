@@ -1,0 +1,6 @@
+1. Start.
+2. Define interface SmartDevice with turnOn(), turnOff(), displayStatus().
+3. Define interface EnergyMonitor with calculatePowerConsumption() returning kWh ((watts * hours)/1000.0).
+4. Implement both interfaces in SmartLight, SmartFan, SmartAC.
+5. In main(), store devices in SmartDevice[] array, turn them on, and print status and power in kWh.
+6. Stop.

@@ -1,0 +1,6 @@
+1. Start.
+2. Define interface DeliveryService (calculateDeliveryCharge, estimateDeliveryTime).
+3. Define interface Trackable (trackOrder, updateLocation).
+4. Implement both in StandardDelivery, ExpressDelivery, InternationalDelivery.
+5. In main(), use interface references to calculate charges, delivery time, and track location.
+6. Stop.

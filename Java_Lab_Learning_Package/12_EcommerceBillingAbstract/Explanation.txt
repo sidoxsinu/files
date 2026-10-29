@@ -1,0 +1,279 @@
+================================================================================
+PROGRAM 12: E-COMMERCE BILLING ABSTRACT CLASS
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create an abstract class Product with an abstract method calculateFinalPrice().
+Implement concrete subclasses:
+- Electronics: 18% GST + 500 shipping
+- Clothing: 10% discount if total >= 2000, then 5% GST
+- Grocery: 5% bulk discount if qty >= 10, then 5% GST
+Demonstrate polymorphic billing across all product types using an array.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: abstract class Product {
+2:     int id, qty;
+3:     String name;
+4:     double price;
+5: 
+6:     Product(int id, String name, double price, int qty) {
+7:         this.id = id;
+8:         this.name = name;
+9:         this.price = price;
+10:         this.qty = qty;
+11:     }
+12: 
+13:     abstract double calculateFinalPrice();
+14: 
+15:     void display() {
+16:         System.out.println(name + " Original: " + (price * qty) + " Final: " + calculateFinalPrice());
+17:     }
+18: }
+19: 
+20: class Electronics extends Product {
+21:     Electronics(int id, String name, double price, int qty) {
+22:         super(id, name, price, qty);
+23:     }
+24: 
+25:     double calculateFinalPrice() {
+26:         double total = price * qty;
+27:         return total + (total * 0.18) + 500;
+28:     }
+29: }
+30: 
+31: class Clothing extends Product {
+32:     Clothing(int id, String name, double price, int qty) {
+33:         super(id, name, price, qty);
+34:     }
+35: 
+36:     double calculateFinalPrice() {
+37:         double total = price * qty;
+38:         double disc = total >= 2000 ? total * 0.10 : 0;
+39:         return (total - disc) + (total - disc) * 0.05;
+40:     }
+41: }
+42: 
+43: class Grocery extends Product {
+44:     Grocery(int id, String name, double price, int qty) {
+45:         super(id, name, price, qty);
+46:     }
+47: 
+48:     double calculateFinalPrice() {
+49:         double total = price * qty;
+50:         double disc = qty >= 10 ? total * 0.05 : 0;
+51:         return (total - disc) + (total - disc) * 0.05;
+52:     }
+53: }
+54: 
+55: class Main {
+56:     public static void main(String[] args) {
+57:         Product[] p = {
+58:             new Electronics(1, "Laptop", 10000, 1),
+59:             new Clothing(2, "Shirt", 1000, 3),
+60:             new Grocery(3, "Rice", 100, 12)
+61:         };
+62: 
+63:         for (Product item : p) {
+64:             item.display();
+65:         }
+66:     }
+67: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: abstract class Product {
+  - Abstract base class defining common fields and the contract for billing.
+
+Line 2:     int id, qty;
+  - 'id': Product ID.
+  - 'qty': Quantity purchased.
+
+Line 3:     String name;
+  - Product name.
+
+Line 4:     double price;
+  - Unit price.
+
+Line 5: (Blank line)
+
+Line 6:     Product(int id, String name, double price, int qty) {
+  - Constructor for the abstract class.
+
+Line 7:         this.id = id;
+  - Sets ID.
+
+Line 8:         this.name = name;
+  - Sets Name.
+
+Line 9:         this.price = price;
+  - Sets unit Price.
+
+Line 10:        this.qty = qty;
+  - Sets Quantity.
+
+Line 11:    }
+  - Closes constructor.
+
+Line 12: (Blank line)
+
+Line 13:    abstract double calculateFinalPrice();
+  - Abstract method: Every product subclass must calculate its final price
+    according to its specific tax and discount rules.
+
+Line 14: (Blank line)
+
+Line 15:    void display() {
+  - Prints product name, original subtotal, and computed final price.
+
+Line 16:        System.out.println(name + " Original: " + (price * qty) + " Final: " + calculateFinalPrice());
+  - Computes original base cost (price * qty) and calls polymorphic calculateFinalPrice().
+
+Line 17:    }
+  - Closes display().
+
+Line 18: }
+  - Closes Product class.
+
+Line 19: (Blank line)
+
+Line 20: class Electronics extends Product {
+  - Concrete subclass for electronic items.
+
+Line 21:     Electronics(int id, String name, double price, int qty) {
+  - Constructor.
+
+Line 22:         super(id, name, price, qty);
+  - Calls Product constructor.
+
+Line 23:     }
+  - Closes constructor.
+
+Line 24: (Blank line)
+
+Line 25:    double calculateFinalPrice() {
+  - Subclass implementation for electronics.
+
+Line 26:        double total = price * qty;
+  - Calculates subtotal.
+
+Line 27:        return total + (total * 0.18) + 500;
+  - Electronics pricing: subtotal + 18% GST + Rs. 500 fixed shipping.
+
+Line 28:    }
+  - Closes calculateFinalPrice().
+
+Line 29: }
+  - Closes Electronics class.
+
+Line 30: (Blank line)
+
+Line 31: class Clothing extends Product {
+  - Concrete subclass for clothing items.
+
+Line 32:     Clothing(int id, String name, double price, int qty) {
+  - Constructor.
+
+Line 33:         super(id, name, price, qty);
+  - Calls Product constructor.
+
+Line 34:     }
+  - Closes constructor.
+
+Line 35: (Blank line)
+
+Line 36:    double calculateFinalPrice() {
+  - Subclass implementation for clothing.
+
+Line 37:        double total = price * qty;
+  - Subtotal.
+
+Line 38:        double disc = total >= 2000 ? total * 0.10 : 0;
+  - If total >= 2000, 10% discount applies; otherwise 0.
+
+Line 39:        return (total - disc) + (total - disc) * 0.05;
+  - Clothing pricing: discounted total + 5% GST.
+
+Line 40:    }
+  - Closes calculateFinalPrice().
+
+Line 41: }
+  - Closes Clothing class.
+
+Line 42: (Blank line)
+
+Line 43: class Grocery extends Product {
+  - Concrete subclass for grocery items.
+
+Line 44:     Grocery(int id, String name, double price, int qty) {
+  - Constructor.
+
+Line 45:         super(id, name, price, qty);
+  - Calls Product constructor.
+
+Line 46:     }
+  - Closes constructor.
+
+Line 47: (Blank line)
+
+Line 48:    double calculateFinalPrice() {
+  - Subclass implementation for grocery.
+
+Line 49:        double total = price * qty;
+  - Subtotal.
+
+Line 50:        double disc = qty >= 10 ? total * 0.05 : 0;
+  - If bulk purchase (qty >= 10), 5% discount applies; otherwise 0.
+
+Line 51:        return (total - disc) + (total - disc) * 0.05;
+  - Grocery pricing: discounted total + 5% GST.
+
+Line 52:    }
+  - Closes calculateFinalPrice().
+
+Line 53: }
+  - Closes Grocery class.
+
+Line 54: (Blank line)
+
+Line 55: class Main {
+  - Driver class.
+
+Line 56:     public static void main(String[] args) {
+  - Main method.
+
+Line 57:         Product[] p = {
+  - Array of Product references.
+
+Line 58:             new Electronics(1, "Laptop", 10000, 1),
+  - Laptop: 10000 + 1800 (18%) + 500 (shipping) = 12300.0.
+
+Line 59:             new Clothing(2, "Shirt", 1000, 3),
+  - Shirts (3000): 10% disc = 300 -> 2700 + 5% (135) = 2835.0.
+
+Line 60:             new Grocery(3, "Rice", 100, 12)
+  - Rice (1200): 5% bulk disc = 60 -> 1140 + 5% (57) = 1197.0.
+
+Line 61:         };
+  - Closes array.
+
+Line 62: (Blank line)
+
+Line 63:         for (Product item : p) {
+  - Iterates through the product array.
+
+Line 64:             item.display();
+  - Prints original price and final calculated price.
+
+Line 65:         }
+  - Closes loop.
+
+Line 66:     }
+  - Closes main().
+
+Line 67: }
+  - Closes Main class.

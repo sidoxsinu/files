@@ -1,0 +1,2 @@
+javac TrafficLight.java
+java TrafficLight

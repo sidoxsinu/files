@@ -1,0 +1,4 @@
+Savings Interest: 1000.0
+Loyalty Benefit: 1000.0
+Penalty applied: 500
+Balance: 7500.0

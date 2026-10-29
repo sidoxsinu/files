@@ -1,0 +1,2 @@
+Enter colour (RED/YELLOW/GREEN): RED
+STOP

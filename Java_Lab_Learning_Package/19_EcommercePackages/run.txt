@@ -1,0 +1,2 @@
+javac -d . Product.java DiscountedProduct.java Order.java
+java shopping.order.Order

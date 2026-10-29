@@ -1,0 +1,2 @@
+Q1: Why should specific catch blocks come before general ones?
+A1: Otherwise the general catch block intercepts the exception, making the specific block unreachable.

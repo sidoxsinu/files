@@ -1,0 +1,2 @@
+Q1: Why must interface methods in implementing classes be public?
+A1: Because interface methods are implicitly public, and overriding methods cannot reduce visibility.

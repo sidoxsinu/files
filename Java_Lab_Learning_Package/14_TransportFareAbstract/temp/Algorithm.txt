@@ -1,0 +1,7 @@
+1. Start.
+2. Create abstract Transport with vehicle no, distance, passengers, abstract calculateFare(), display().
+3. Derive Bus: dist * pass * 2.
+4. Derive Taxi: (dist * 15) + (pass * 50) + 100.
+5. Derive ElectricVehicle: (dist * 8) + (pass * 20) + 50.
+6. In main(), iterate through Transport[] array and display fares.
+7. Stop.

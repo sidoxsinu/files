@@ -1,0 +1,7 @@
+1. Start.
+2. Define class Product with id, name, price.
+3. Define class ElectronicProduct extending Product with warranty and gst.
+4. Define class SmartPhone extending ElectronicProduct with storage and insurance.
+5. In display(), calculate gst and final price = price + gst + insurance.
+6. In main(), create SmartPhone object and call display().
+7. Stop.

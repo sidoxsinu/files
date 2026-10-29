@@ -1,0 +1,275 @@
+================================================================================
+PROGRAM 09: ONLINE BANKING INHERITANCE
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement account inheritance with multilevel and hierarchical branches:
+- Base class: Account (balance, deposit, withdraw)
+- SavingsAccount extends Account (calculates 5% interest)
+- PremiumSavingsAccount extends SavingsAccount (adds loyalty benefit if balance >= 50,000)
+- CurrentAccount extends Account (applies penalty of 500 if balance drops below 10,000)
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: class Account {
+2:     double balance;
+3: 
+4:     Account(double b) {
+5:         balance = b;
+6:     }
+7: 
+8:     void deposit(double a) {
+9:         balance += a;
+10:     }
+11: 
+12:     void withdraw(double a) {
+13:         if (a <= balance) balance -= a;
+14:         else System.out.println("Insufficient balance");
+15:     }
+16: 
+17:     void display() {
+18:         System.out.println("Balance: " + balance);
+19:     }
+20: }
+21: 
+22: class SavingsAccount extends Account {
+23:     SavingsAccount(double b) {
+24:         super(b);
+25:     }
+26: 
+27:     double interest() {
+28:         return balance * 0.05;
+29:     }
+30: }
+31: 
+32: class PremiumSavingsAccount extends SavingsAccount {
+33:     PremiumSavingsAccount(double b) {
+34:         super(b);
+35:     }
+36: 
+37:     double loyaltyBenefit() {
+38:         return balance >= 50000 ? 1000 : 0;
+39:     }
+40: }
+41: 
+42: class CurrentAccount extends Account {
+43:     CurrentAccount(double b) {
+44:         super(b);
+45:     }
+46: 
+47:     void checkMinimum() {
+48:         if (balance < 10000) {
+49:             balance -= 500;
+50:             System.out.println("Penalty applied: 500");
+51:         }
+52:     }
+53: }
+54: 
+55: class Main {
+56:     public static void main(String[] args) {
+57:         SavingsAccount s = new SavingsAccount(20000);
+58:         System.out.println("Savings Interest: " + s.interest());
+59: 
+60:         PremiumSavingsAccount p = new PremiumSavingsAccount(60000);
+61:         System.out.println("Loyalty Benefit: " + p.loyaltyBenefit());
+62: 
+63:         CurrentAccount c = new CurrentAccount(8000);
+64:         c.checkMinimum();
+65:         c.display();
+66:     }
+67: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class Account {
+  - Root class representing a general bank account.
+
+Line 2:     double balance;
+  - Instance variable for the account balance.
+
+Line 3: (Blank line)
+
+Line 4:     Account(double b) {
+  - Constructor initializing the initial account balance.
+
+Line 5:         balance = b;
+  - Assigns initial balance.
+
+Line 6:     }
+  - Closes Account constructor.
+
+Line 7: (Blank line)
+
+Line 8:     void deposit(double a) {
+  - Method to credit amount 'a' to balance.
+
+Line 9:         balance += a;
+  - Adds deposit amount to balance.
+
+Line 10:    }
+  - Closes deposit().
+
+Line 11: (Blank line)
+
+Line 12:    void withdraw(double a) {
+  - Method to debit amount 'a' with balance check.
+
+Line 13:        if (a <= balance) balance -= a;
+  - Checks if funds are sufficient; deducts amount if true.
+
+Line 14:        else System.out.println("Insufficient balance");
+  - Alerts user if requested withdrawal exceeds available balance.
+
+Line 15:    }
+  - Closes withdraw().
+
+Line 16: (Blank line)
+
+Line 17:    void display() {
+  - Displays current balance.
+
+Line 18:        System.out.println("Balance: " + balance);
+  - Prints balance.
+
+Line 19:    }
+  - Closes display().
+
+Line 20: }
+  - Closes Account class.
+
+Line 21: (Blank line)
+
+Line 22: class SavingsAccount extends Account {
+  - Subclass of Account. Adds interest calculation.
+
+Line 23:     SavingsAccount(double b) {
+  - Constructor for SavingsAccount.
+
+Line 24:         super(b);
+  - Invokes Account constructor with opening balance 'b'.
+
+Line 25:     }
+  - Closes constructor.
+
+Line 26: (Blank line)
+
+Line 27:     double interest() {
+  - Computes annual interest.
+
+Line 28:         return balance * 0.05;
+  - Returns 5% interest on current balance.
+
+Line 29:     }
+  - Closes interest().
+
+Line 30: }
+  - Closes SavingsAccount class.
+
+Line 31: (Blank line)
+
+Line 32: class PremiumSavingsAccount extends SavingsAccount {
+  - Subclass of SavingsAccount (Multilevel: Account -> SavingsAccount -> PremiumSavingsAccount).
+
+Line 33:     PremiumSavingsAccount(double b) {
+  - Constructor for PremiumSavingsAccount.
+
+Line 34:         super(b);
+  - Invokes SavingsAccount constructor.
+
+Line 35:     }
+  - Closes constructor.
+
+Line 36: (Blank line)
+
+Line 37:     double loyaltyBenefit() {
+  - Computes loyalty reward based on balance.
+
+Line 38:         return balance >= 50000 ? 1000 : 0;
+  - Ternary operator (condition ? true_val : false_val).
+  - Returns Rs. 1000 if balance is 50,000 or more, otherwise 0.
+
+Line 39:     }
+  - Closes loyaltyBenefit().
+
+Line 40: }
+  - Closes PremiumSavingsAccount class.
+
+Line 41: (Blank line)
+
+Line 42: class CurrentAccount extends Account {
+  - Subclass of Account (Hierarchical sibling to SavingsAccount).
+
+Line 43:     CurrentAccount(double b) {
+  - CurrentAccount constructor.
+
+Line 44:         super(b);
+  - Calls Account constructor.
+
+Line 45:     }
+  - Closes constructor.
+
+Line 46: (Blank line)
+
+Line 47:     void checkMinimum() {
+  - Verifies if minimum balance of Rs. 10,000 is maintained.
+
+Line 48:         if (balance < 10000) {
+  - Checks if balance has breached the 10,000 minimum threshold.
+
+Line 49:             balance -= 500;
+  - Deducts a penalty fee of Rs. 500 from the balance.
+
+Line 50:             System.out.println("Penalty applied: 500");
+  - Prints penalty notification.
+
+Line 51:         }
+  - Closes if statement.
+
+Line 52:     }
+  - Closes checkMinimum().
+
+Line 53: }
+  - Closes CurrentAccount class.
+
+Line 54: (Blank line)
+
+Line 55: class Main {
+  - Driver class.
+
+Line 56:     public static void main(String[] args) {
+  - Entry point.
+
+Line 57:         SavingsAccount s = new SavingsAccount(20000);
+  - Creates SavingsAccount with 20000.
+
+Line 58:         System.out.println("Savings Interest: " + s.interest());
+  - Prints interest (20000 * 0.05 = 1000.0).
+
+Line 59: (Blank line)
+
+Line 60:         PremiumSavingsAccount p = new PremiumSavingsAccount(60000);
+  - Creates PremiumSavingsAccount with 60000.
+
+Line 61:         System.out.println("Loyalty Benefit: " + p.loyaltyBenefit());
+  - Prints loyalty benefit (1000.0 since 60000 >= 50000).
+
+Line 62: (Blank line)
+
+Line 63:         CurrentAccount c = new CurrentAccount(8000);
+  - Creates CurrentAccount with 8000 (below 10,000).
+
+Line 64:         c.checkMinimum();
+  - Applies penalty: balance becomes 7500.0.
+
+Line 65:         c.display();
+  - Displays balance (7500.0).
+
+Line 66:     }
+  - Closes main().
+
+Line 67: }
+  - Closes Main class.

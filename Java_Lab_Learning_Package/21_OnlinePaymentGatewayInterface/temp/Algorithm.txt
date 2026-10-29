@@ -1,0 +1,6 @@
+1. Start.
+2. Define interface Payment with processPayment(amount) and generateReceipt().
+3. Define interface Refundable with processRefund(amount).
+4. Implement both interfaces in CreditCardPayment, UPIPayment, NetBankingPayment.
+5. In main(), use interface references to process payment, receipt, and refund.
+6. Stop.

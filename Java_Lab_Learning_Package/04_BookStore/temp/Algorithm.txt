@@ -1,0 +1,7 @@
+1. Start.
+2. Create class Book with id, title, author, price.
+3. Define default constructor initializing with default values.
+4. Define parameterized constructor initializing with given parameters.
+5. Define discount(percent) to reduce price.
+6. In main(), create objects using both constructors, apply discount, and display.
+7. Stop.

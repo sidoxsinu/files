@@ -1,0 +1,6 @@
+1. Start.
+2. Create MyThread extending Thread, override run() with loop and Thread.sleep(100).
+3. Create Bank with synchronized withdraw() to ensure thread safety.
+4. Create Customer extending Thread that calls bank.withdraw().
+5. In main(), start and join MyThread instances, then start concurrent customer withdrawals on Bank.
+6. Stop.

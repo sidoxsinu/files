@@ -1,0 +1,2 @@
+javac -d . Employee.java Manager.java PayrollManager.java
+java company.management.PayrollManager

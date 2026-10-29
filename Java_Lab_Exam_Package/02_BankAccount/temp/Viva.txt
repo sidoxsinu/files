@@ -1,0 +1,5 @@
+Q1: What is data encapsulation?
+A1: Wrapping variables and methods operating on them into a single class.
+
+Q2: What is the purpose of conditional check in withdraw()?
+A2: To prevent balance from becoming negative (overdraft).

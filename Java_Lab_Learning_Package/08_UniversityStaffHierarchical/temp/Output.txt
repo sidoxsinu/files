@@ -1,0 +1,3 @@
+Arun Salary: 57000.0
+Anu Salary: 25000.0
+Ravi Salary: 17500.0

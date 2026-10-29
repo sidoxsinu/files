@@ -1,0 +1,3 @@
+Laptop Original: 10000.0 Final: 12300.0
+Shirt Original: 3000.0 Final: 2835.0
+Rice Original: 1200.0 Final: 1197.0

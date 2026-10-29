@@ -1,0 +1,2 @@
+Q1: What does super() do?
+A1: Invokes the constructor of the immediate superclass.

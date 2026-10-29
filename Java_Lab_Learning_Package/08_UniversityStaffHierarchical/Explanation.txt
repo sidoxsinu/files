@@ -1,0 +1,253 @@
+================================================================================
+PROGRAM 08: UNIVERSITY STAFF HIERARCHICAL INHERITANCE
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement hierarchical inheritance in a university staff system:
+- Common base class: Staff (id, name, basic salary, calculateSalary())
+- Subclasses extending Staff:
+  1. Professor: Basic + 20% DA + 10% HRA + 5000 research allowance
+  2. LabAssistant: Basic + 15% DA + 2000 lab allowance
+  3. Clerk: Basic + 10% DA + 1000 transport allowance
+Demonstrate method overriding and polymorphic salary calculation.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: class Staff {
+2:     int id;
+3:     String name;
+4:     double basic;
+5: 
+6:     Staff(int id, String name, double basic) {
+7:         this.id = id;
+8:         this.name = name;
+9:         this.basic = basic;
+10:     }
+11: 
+12:     double calculateSalary() {
+13:         return basic;
+14:     }
+15: 
+16:     void display() {
+17:         System.out.println(name + " Salary: " + calculateSalary());
+18:     }
+19: }
+20: 
+21: class Professor extends Staff {
+22:     Professor(int id, String name, double basic) {
+23:         super(id, name, basic);
+24:     }
+25: 
+26:     double calculateSalary() {
+27:         return basic + basic * 0.20 + basic * 0.10 + 5000;
+28:     }
+29: }
+30: 
+31: class LabAssistant extends Staff {
+32:     LabAssistant(int id, String name, double basic) {
+33:         super(id, name, basic);
+34:     }
+35: 
+36:     double calculateSalary() {
+37:         return basic + basic * 0.15 + 2000;
+38:     }
+39: }
+40: 
+41: class Clerk extends Staff {
+42:     Clerk(int id, String name, double basic) {
+43:         super(id, name, basic);
+44:     }
+45: 
+46:     double calculateSalary() {
+47:         return basic + basic * 0.10 + 1000;
+48:     }
+49: }
+50: 
+51: class Main {
+52:     public static void main(String[] args) {
+53:         Staff s1 = new Professor(1, "Arun", 40000);
+54:         Staff s2 = new LabAssistant(2, "Anu", 20000);
+55:         Staff s3 = new Clerk(3, "Ravi", 15000);
+56:         s1.display();
+57:         s2.display();
+58:         s3.display();
+59:     }
+60: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class Staff {
+  - Parent class 'Staff' at the root of hierarchical inheritance.
+
+Line 2:     int id;
+  - Instance variable for staff ID.
+
+Line 3:     String name;
+  - Instance variable for staff name.
+
+Line 4:     double basic;
+  - Instance variable for basic salary.
+
+Line 5: (Blank line)
+
+Line 6:     Staff(int id, String name, double basic) {
+  - Constructor for base Staff class.
+
+Line 7:         this.id = id;
+  - Initializes staff ID.
+
+Line 8:         this.name = name;
+  - Initializes staff name.
+
+Line 9:         this.basic = basic;
+  - Initializes basic salary.
+
+Line 10:    }
+  - Closes Staff constructor.
+
+Line 11: (Blank line)
+
+Line 12:    double calculateSalary() {
+  - Base implementation of calculateSalary(). Returns basic salary by default.
+  - Subclasses will override this method.
+
+Line 13:        return basic;
+  - Returns basic salary.
+
+Line 14:    }
+  - Closes calculateSalary().
+
+Line 15: (Blank line)
+
+Line 16:    void display() {
+  - Method to print staff name and calculated salary.
+
+Line 17:        System.out.println(name + " Salary: " + calculateSalary());
+  - Calls calculateSalary(). Due to dynamic method dispatch (runtime polymorphism),
+    the overridden method of the actual subclass object is executed!
+
+Line 18:    }
+  - Closes display().
+
+Line 19: }
+  - Closes Staff class.
+
+Line 20: (Blank line)
+
+Line 21: class Professor extends Staff {
+  - Subclass 1: Professor inherits directly from Staff (Branch 1 of hierarchy).
+
+Line 22:     Professor(int id, String name, double basic) {
+  - Professor constructor.
+
+Line 23:         super(id, name, basic);
+  - Calls parent Staff constructor.
+
+Line 24:     }
+  - Closes constructor.
+
+Line 25: (Blank line)
+
+Line 26:    double calculateSalary() {
+  - Overrides calculateSalary() with Professor formula.
+
+Line 27:        return basic + basic * 0.20 + basic * 0.10 + 5000;
+  - Computes: Basic + 20% DA + 10% HRA + 5000 research allowance.
+
+Line 28:    }
+  - Closes calculateSalary().
+
+Line 29: }
+  - Closes Professor class.
+
+Line 30: (Blank line)
+
+Line 31: class LabAssistant extends Staff {
+  - Subclass 2: LabAssistant inherits directly from Staff (Branch 2 of hierarchy).
+
+Line 32:     LabAssistant(int id, String name, double basic) {
+  - LabAssistant constructor.
+
+Line 33:         super(id, name, basic);
+  - Calls parent constructor.
+
+Line 34:     }
+  - Closes constructor.
+
+Line 35: (Blank line)
+
+Line 36:    double calculateSalary() {
+  - Overrides calculateSalary() with LabAssistant formula.
+
+Line 37:        return basic + basic * 0.15 + 2000;
+  - Computes: Basic + 15% DA + 2000 lab allowance.
+
+Line 38:    }
+  - Closes calculateSalary().
+
+Line 39: }
+  - Closes LabAssistant class.
+
+Line 40: (Blank line)
+
+Line 41: class Clerk extends Staff {
+  - Subclass 3: Clerk inherits directly from Staff (Branch 3 of hierarchy).
+
+Line 42:     Clerk(int id, String name, double basic) {
+  - Clerk constructor.
+
+Line 43:         super(id, name, basic);
+  - Calls parent constructor.
+
+Line 44:     }
+  - Closes constructor.
+
+Line 45: (Blank line)
+
+Line 46:    double calculateSalary() {
+  - Overrides calculateSalary() with Clerk formula.
+
+Line 47:        return basic + basic * 0.10 + 1000;
+  - Computes: Basic + 10% DA + 1000 transport allowance.
+
+Line 48:    }
+  - Closes calculateSalary().
+
+Line 49: }
+  - Closes Clerk class.
+
+Line 50: (Blank line)
+
+Line 51: class Main {
+  - Driver class containing main().
+
+Line 52:    public static void main(String[] args) {
+  - Program entry point.
+
+Line 53:        Staff s1 = new Professor(1, "Arun", 40000);
+  - Polymorphic reference: Variable 's1' of superclass type 'Staff' holds an object of subclass 'Professor'.
+
+Line 54:        Staff s2 = new LabAssistant(2, "Anu", 20000);
+  - Variable 's2' of superclass type 'Staff' holds a 'LabAssistant' object.
+
+Line 55:        Staff s3 = new Clerk(3, "Ravi", 15000);
+  - Variable 's3' of superclass type 'Staff' holds a 'Clerk' object.
+
+Line 56:        s1.display();
+  - Calls display() on s1 -> dynamically invokes Professor.calculateSalary() -> 57000.0.
+
+Line 57:        s2.display();
+  - Calls display() on s2 -> dynamically invokes LabAssistant.calculateSalary() -> 25000.0.
+
+Line 58:        s3.display();
+  - Calls display() on s3 -> dynamically invokes Clerk.calculateSalary() -> 17500.0.
+
+Line 59:    }
+  - Closes main().
+
+Line 60: }
+  - Closes Main class.

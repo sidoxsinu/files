@@ -1,0 +1,7 @@
+1. Start.
+2. Create InvalidUserException and InvalidPasswordException.
+3. accessAccount() validates username/password and throws exceptions.
+4. validateUser() propagates using throws.
+5. login() propagates using throws.
+6. In main(), use loop of 3 attempts, catch exceptions, and break on success.
+7. Stop.

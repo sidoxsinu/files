@@ -1,0 +1,6 @@
+1. Start.
+2. Outer try catches InputMismatchException for non-numeric input.
+3. Inner try validates product ID (throws InvalidProductException if not 101 or 102), quantity, price.
+4. If payment < total, throw InsufficientPaymentException.
+5. In finally, print "Order processing completed".
+6. Stop.

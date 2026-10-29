@@ -1,0 +1,2 @@
+Q1: What does the -d option in javac do?
+A1: Specifies the destination directory where compiled package folders are created.

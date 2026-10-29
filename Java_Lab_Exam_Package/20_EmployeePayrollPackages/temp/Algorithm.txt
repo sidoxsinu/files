@@ -1,0 +1,5 @@
+1. Start.
+2. In company.employee, create Employee with private id/basic, default dept, protected grade, public name.
+3. In company.payroll, create Manager extending Employee (accesses protected grade directly, basic via getter).
+4. In company.management, create PayrollManager with main() to generate salary report.
+5. Stop.

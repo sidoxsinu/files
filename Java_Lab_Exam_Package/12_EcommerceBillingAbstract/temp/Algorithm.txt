@@ -1,0 +1,7 @@
+1. Start.
+2. Define abstract class Product with id, name, price, qty, abstract calculateFinalPrice(), display().
+3. Derive Electronics: total + 18% GST + 500 warranty.
+4. Derive Clothing: total - 10% discount (if >= 2000) + 5% GST.
+5. Derive Grocery: total - 5% discount (if qty >= 10) + 5% GST.
+6. In main(), store products in Product[] array and display details.
+7. Stop.

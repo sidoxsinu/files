@@ -1,0 +1,171 @@
+================================================================================
+PROGRAM 21: ONLINE PAYMENT GATEWAY INTERFACE
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Demonstrate multiple inheritance via interfaces in Java:
+- Interface 1: Payment (methods: processPayment(double a), generateReceipt())
+- Interface 2: Refundable (method: processRefund(double a))
+- Classes implementing both interfaces:
+  * CreditCardPayment
+  * UPIPayment
+  * NetBankingPayment
+Demonstrate interface reference variables and casting to access methods from both interfaces.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: interface Payment {
+2:     void processPayment(double a);
+3:     void generateReceipt();
+4: }
+5: 
+6: interface Refundable {
+7:     void processRefund(double a);
+8: }
+9: 
+10: class CreditCardPayment implements Payment, Refundable {
+11:     public void processPayment(double a) { System.out.println("Card Payment: " + a); }
+12:     public void generateReceipt() { System.out.println("Card receipt generated"); }
+13:     public void processRefund(double a) { System.out.println("Card Refund: " + a); }
+14: }
+15: 
+16: class UPIPayment implements Payment, Refundable {
+17:     public void processPayment(double a) { System.out.println("UPI Payment: " + a); }
+18:     public void generateReceipt() { System.out.println("UPI receipt generated"); }
+19:     public void processRefund(double a) { System.out.println("UPI Refund: " + a); }
+20: }
+21: 
+22: class NetBankingPayment implements Payment, Refundable {
+23:     public void processPayment(double a) { System.out.println("NetBanking Payment: " + a); }
+24:     public void generateReceipt() { System.out.println("NetBanking receipt generated"); }
+25:     public void processRefund(double a) { System.out.println("NetBanking Refund: " + a); }
+26: }
+27: 
+28: class Main {
+29:     public static void main(String[] args) {
+30:         Payment p = new UPIPayment();
+31:         p.processPayment(1000);
+32:         p.generateReceipt();
+33: 
+34:         Refundable r = (Refundable) p;
+35:         r.processRefund(500);
+36:     }
+37: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: interface Payment {
+  - 'interface': Keyword used to define an interface in Java. An interface is a 100%
+    abstract blueprint containing method specifications that implementing classes must define.
+  - Represents the first contract for payment processing.
+
+Line 2:     void processPayment(double a);
+  - Interface method signature. By default, all methods in an interface are 'public' and 'abstract'.
+  - Takes a double argument 'a' representing the transaction amount.
+
+Line 3:     void generateReceipt();
+  - Method signature to produce a receipt.
+
+Line 4: }
+  - Closes Payment interface.
+
+Line 5: (Blank line)
+
+Line 6: interface Refundable {
+  - Second interface: represents capability to process refunds.
+  - Demonstrates multiple interface implementation (Java's solution for multiple inheritance).
+
+Line 7:     void processRefund(double a);
+  - Abstract method signature for refunding amount 'a'.
+
+Line 8: }
+  - Closes Refundable interface.
+
+Line 9: (Blank line)
+
+Line 10: class CreditCardPayment implements Payment, Refundable {
+  - 'implements': Keyword used by a class to implement one or more interfaces.
+  - Separating interfaces with a comma ('Payment, Refundable') achieves multiple inheritance of type.
+
+Line 11:     public void processPayment(double a) { System.out.println("Card Payment: " + a); }
+  - Implements processPayment(). In an implementing class, interface methods MUST be declared 'public'.
+
+Line 12:     public void generateReceipt() { System.out.println("Card receipt generated"); }
+  - Implements generateReceipt().
+
+Line 13:     public void processRefund(double a) { System.out.println("Card Refund: " + a); }
+  - Implements processRefund() from the Refundable interface.
+
+Line 14: }
+  - Closes CreditCardPayment class.
+
+Line 15: (Blank line)
+
+Line 16: class UPIPayment implements Payment, Refundable {
+  - Implements Payment and Refundable for UPI.
+
+Line 17:     public void processPayment(double a) { System.out.println("UPI Payment: " + a); }
+  - Prints UPI payment confirmation.
+
+Line 18:     public void generateReceipt() { System.out.println("UPI receipt generated"); }
+  - Prints UPI receipt confirmation.
+
+Line 19:     public void processRefund(double a) { System.out.println("UPI Refund: " + a); }
+  - Prints UPI refund confirmation.
+
+Line 20: }
+  - Closes UPIPayment class.
+
+Line 21: (Blank line)
+
+Line 22: class NetBankingPayment implements Payment, Refundable {
+  - Implements Payment and Refundable for Net Banking.
+
+Line 23:     public void processPayment(double a) { System.out.println("NetBanking Payment: " + a); }
+  - NetBanking payment implementation.
+
+Line 24:     public void generateReceipt() { System.out.println("NetBanking receipt generated"); }
+  - NetBanking receipt implementation.
+
+Line 25:     public void processRefund(double a) { System.out.println("NetBanking Refund: " + a); }
+  - NetBanking refund implementation.
+
+Line 26: }
+  - Closes NetBankingPayment class.
+
+Line 27: (Blank line)
+
+Line 28: class Main {
+  - Driver class.
+
+Line 29:     public static void main(String[] args) {
+  - Main method.
+
+Line 30:         Payment p = new UPIPayment();
+  - Declares an interface reference 'Payment p' pointing to a new UPIPayment object.
+  - Through 'p', only methods declared in the Payment interface (processPayment, generateReceipt) can be called directly.
+
+Line 31:         p.processPayment(1000);
+  - Calls processPayment(1000) -> prints "UPI Payment: 1000.0".
+
+Line 32:         p.generateReceipt();
+  - Calls generateReceipt() -> prints "UPI receipt generated".
+
+Line 33: (Blank line)
+
+Line 34:         Refundable r = (Refundable) p;
+  - Interface typecasting: Casts reference 'p' to type 'Refundable'. This is legal because
+    the underlying object (UPIPayment) implements both Payment and Refundable.
+
+Line 35:         r.processRefund(500);
+  - Calls processRefund(500) via the Refundable reference -> prints "UPI Refund: 500.0".
+
+Line 36:     }
+  - Closes main().
+
+Line 37: }
+  - Closes Main class.

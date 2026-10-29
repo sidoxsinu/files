@@ -1,0 +1,163 @@
+================================================================================
+PROGRAM 04: BOOK STORE MANAGEMENT
+FILE: Book.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create a Book class with book ID, title, author, and price. Demonstrate constructor
+overloading using both a default constructor (zero parameters) and a parameterized
+constructor. Apply a percentage discount and display the final price.
+
+================================================================================
+COMPLETE SOURCE CODE (Book.java)
+================================================================================
+1: class Book {
+2:     int id;
+3:     String title, author;
+4:     double price;
+5: 
+6:     Book() {
+7:         id = 0;
+8:         title = "Unknown";
+9:         author = "Unknown";
+10:         price = 0;
+11:     }
+12: 
+13:     Book(int i, String t, String a, double p) {
+14:         id = i;
+15:         title = t;
+16:         author = a;
+17:         price = p;
+18:     }
+19: 
+20:     void discount(double percent) {
+21:         price = price - (price * percent / 100);
+22:     }
+23: 
+24:     void display() {
+25:         System.out.println("ID: " + id + ", Title: " + title + ", Author: " + author + ", Price: " + price);
+26:     }
+27: 
+28:     public static void main(String[] args) {
+29:         Book b1 = new Book();
+30:         Book b2 = new Book(101, "Java", "James", 500);
+31:         b1.display();
+32:         b2.display();
+33:         b2.discount(10);
+34:         System.out.println("After discount:");
+35:         b2.display();
+36:     }
+37: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class Book {
+  - Defines the Book class.
+
+Line 2:     int id;
+  - Instance variable for the book ID.
+
+Line 3:     String title, author;
+  - Two String instance variables storing book title and author name.
+
+Line 4:     double price;
+  - Instance variable for the book price.
+
+Line 5: (Blank line)
+
+Line 6:     Book() {
+  - Default (no-argument) constructor. Demonstrates constructor overloading.
+  - Used when an object is instantiated without specific details: new Book().
+
+Line 7:         id = 0;
+  - Assigns default ID 0.
+
+Line 8:         title = "Unknown";
+  - Assigns default title "Unknown".
+
+Line 9:         author = "Unknown";
+  - Assigns default author "Unknown".
+
+Line 10:        price = 0;
+  - Assigns default price 0.0.
+
+Line 11:    }
+  - Closes default constructor.
+
+Line 12: (Blank line)
+
+Line 13:    Book(int i, String t, String a, double p) {
+  - Parameterized constructor accepting (id, title, author, price).
+  - Enables custom initialization upon creation.
+
+Line 14:        id = i;
+  - Sets instance variable id to argument i.
+
+Line 15:        title = t;
+  - Sets instance variable title to argument t.
+
+Line 16:        author = a;
+  - Sets instance variable author to argument a.
+
+Line 17:        price = p;
+  - Sets instance variable price to argument p.
+
+Line 18:    }
+  - Closes parameterized constructor.
+
+Line 19: (Blank line)
+
+Line 20:    void discount(double percent) {
+  - Method accepting a percentage discount (e.g. 10.0 for 10%).
+
+Line 21:        price = price - (price * percent / 100);
+  - Computes discount amount: price * percent / 100.
+  - Subtracts discount from the original price to update the price in-place.
+
+Line 22:    }
+  - Closes discount() method.
+
+Line 23: (Blank line)
+
+Line 24:    void display() {
+  - Prints all attributes of the book in a single neat line.
+
+Line 25:        System.out.println("ID: " + id + ", Title: " + title + ", Author: " + author + ", Price: " + price);
+  - Formats and prints id, title, author, and price.
+
+Line 26:    }
+  - Closes display() method.
+
+Line 27: (Blank line)
+
+Line 28:    public static void main(String[] args) {
+  - Program entry point.
+
+Line 29:        Book b1 = new Book();
+  - Calls default constructor; creates book with default values.
+
+Line 30:        Book b2 = new Book(101, "Java", "James", 500);
+  - Calls parameterized constructor; creates book with ID 101, Title "Java", Author "James", Price 500.
+
+Line 31:        b1.display();
+  - Displays b1: ID: 0, Title: Unknown, Author: Unknown, Price: 0.0.
+
+Line 32:        b2.display();
+  - Displays b2: ID: 101, Title: Java, Author: James, Price: 500.0.
+
+Line 33:        b2.discount(10);
+  - Applies 10% discount on b2 (500 - 50 = 450.0).
+
+Line 34:        System.out.println("After discount:");
+  - Prints header banner.
+
+Line 35:        b2.display();
+  - Displays b2 after discount: ID: 101, Title: Java, Author: James, Price: 450.0.
+
+Line 36:    }
+  - Closes main method.
+
+Line 37: }
+  - Closes Book class.

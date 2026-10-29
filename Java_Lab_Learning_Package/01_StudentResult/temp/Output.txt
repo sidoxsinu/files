@@ -1,0 +1,8 @@
+Roll No: 1
+Name: Arun
+Total: 245
+Average: 81.66666666666667
+Roll No: 2
+Name: Anu
+Total: 270
+Average: 90.0

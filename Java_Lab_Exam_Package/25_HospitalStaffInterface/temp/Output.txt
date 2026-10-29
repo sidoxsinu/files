@@ -1,0 +1,7 @@
+Arun treats patients
+Salary: 50000.0
+Anu cares for patients
+Salary: 25000.0
+Ravi treats patients
+Ravi handles emergency
+Salary: 60000.0

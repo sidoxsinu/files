@@ -1,0 +1,2 @@
+Patient: Arun Bill: 5000.0 RecordNo: 101
+Patient: Anu Bill: 9000.0 RecordNo: 102

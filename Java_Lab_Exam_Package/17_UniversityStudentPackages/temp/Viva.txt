@@ -1,0 +1,2 @@
+Q1: Why are getters and setters needed across packages?
+A1: Because private and default members cannot be accessed directly outside their class/package.

@@ -1,0 +1,8 @@
+1. Start.
+2. Create class Student with rollNo, name, m1, m2, m3.
+3. Use parameterized constructor to initialize data members.
+4. Define total() to return m1 + m2 + m3.
+5. Define average() to return total() / 3.0.
+6. Define display() to print rollNo, name, total, and average.
+7. In main(), create two Student objects and call display().
+8. Stop.

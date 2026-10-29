@@ -1,0 +1,284 @@
+================================================================================
+PROGRAM 10: HOSPITAL MANAGEMENT INHERITANCE
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement inheritance in a hospital system:
+- Common base class: HospitalPerson (id, name)
+- Derived class: Staff (salary) extends HospitalPerson
+- Doctor extends Staff (additional pay: patients * 500)
+- Nurse extends Staff (additional pay: shifts * 300)
+- Patient extends HospitalPerson (calculates bill = room + treatment)
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: class HospitalPerson {
+2:     int id;
+3:     String name;
+4: 
+5:     HospitalPerson(int id, String name) {
+6:         this.id = id;
+7:         this.name = name;
+8:     }
+9: }
+10: 
+11: class Staff extends HospitalPerson {
+12:     double salary;
+13: 
+14:     Staff(int id, String name, double salary) {
+15:         super(id, name);
+16:         this.salary = salary;
+17:     }
+18: }
+19: 
+20: class Doctor extends Staff {
+21:     int patients;
+22: 
+23:     Doctor(int id, String name, double salary, int patients) {
+24:         super(id, name, salary);
+25:         this.patients = patients;
+26:     }
+27: 
+28:     void display() {
+29:         System.out.println("Doctor: " + name + " Total: " + (salary + patients * 500));
+30:     }
+31: }
+32: 
+33: class Nurse extends Staff {
+34:     int shifts;
+35: 
+36:     Nurse(int id, String name, double salary, int shifts) {
+37:         super(id, name, salary);
+38:         this.shifts = shifts;
+39:     }
+40: 
+41:     void display() {
+42:         System.out.println("Nurse: " + name + " Total: " + (salary + shifts * 300));
+43:     }
+44: }
+45: 
+46: class Patient extends HospitalPerson {
+47:     double room, treatment;
+48: 
+49:     Patient(int id, String name, double room, double treatment) {
+50:         super(id, name);
+51:         this.room = room;
+52:         this.treatment = treatment;
+53:     }
+54: 
+55:     void display() {
+56:         System.out.println("Patient: " + name + " Bill: " + (room + treatment));
+57:     }
+58: }
+59: 
+60: class Main {
+61:     public static void main(String[] args) {
+62:         Doctor d = new Doctor(1, "Arun", 50000, 10);
+63:         Nurse n = new Nurse(2, "Anu", 25000, 5);
+64:         Patient p = new Patient(3, "Ravi", 3000, 5000);
+65:         d.display();
+66:         n.display();
+67:         p.display();
+68:     }
+69: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class HospitalPerson {
+  - Base class representing any person in the hospital (staff or patient).
+
+Line 2:     int id;
+  - Person's ID.
+
+Line 3:     String name;
+  - Person's Name.
+
+Line 4: (Blank line)
+
+Line 5:     HospitalPerson(int id, String name) {
+  - Constructor for HospitalPerson.
+
+Line 6:         this.id = id;
+  - Sets ID.
+
+Line 7:         this.name = name;
+  - Sets Name.
+
+Line 8:     }
+  - Closes constructor.
+
+Line 9: }
+  - Closes HospitalPerson class.
+
+Line 10: (Blank line)
+
+Line 11: class Staff extends HospitalPerson {
+  - Intermediate class for all hospital employees.
+
+Line 12:     double salary;
+  - Base monthly salary for staff.
+
+Line 13: (Blank line)
+
+Line 14:     Staff(int id, String name, double salary) {
+  - Staff constructor.
+
+Line 15:         super(id, name);
+  - Calls HospitalPerson constructor.
+
+Line 16:         this.salary = salary;
+  - Sets base salary.
+
+Line 17:     }
+  - Closes constructor.
+
+Line 18: }
+  - Closes Staff class.
+
+Line 19: (Blank line)
+
+Line 20: class Doctor extends Staff {
+  - Subclass representing doctors (multilevel inheritance from HospitalPerson via Staff).
+
+Line 21:     int patients;
+  - Number of patients treated by the doctor.
+
+Line 22: (Blank line)
+
+Line 23:     Doctor(int id, String name, double salary, int patients) {
+  - Doctor constructor.
+
+Line 24:         super(id, name, salary);
+  - Calls Staff constructor.
+
+Line 25:         this.patients = patients;
+  - Sets patient count.
+
+Line 26:     }
+  - Closes constructor.
+
+Line 27: (Blank line)
+
+Line 28:     void display() {
+  - Prints doctor's earnings.
+
+Line 29:         System.out.println("Doctor: " + name + " Total: " + (salary + patients * 500));
+  - Total pay = salary + (patients * 500 per patient).
+
+Line 30:     }
+  - Closes display().
+
+Line 31: }
+  - Closes Doctor class.
+
+Line 32: (Blank line)
+
+Line 33: class Nurse extends Staff {
+  - Subclass representing nurses (sibling to Doctor under Staff).
+
+Line 34:     int shifts;
+  - Number of extra night/weekend shifts worked.
+
+Line 35: (Blank line)
+
+Line 36:     Nurse(int id, String name, double salary, int shifts) {
+  - Nurse constructor.
+
+Line 37:         super(id, name, salary);
+  - Calls Staff constructor.
+
+Line 38:         this.shifts = shifts;
+  - Sets shift count.
+
+Line 39:     }
+  - Closes constructor.
+
+Line 40: (Blank line)
+
+Line 41:     void display() {
+  - Prints nurse's earnings.
+
+Line 42:         System.out.println("Nurse: " + name + " Total: " + (salary + shifts * 300));
+  - Total pay = salary + (shifts * 300 per shift).
+
+Line 43:     }
+  - Closes display().
+
+Line 44: }
+  - Closes Nurse class.
+
+Line 45: (Blank line)
+
+Line 46: class Patient extends HospitalPerson {
+  - Direct subclass of HospitalPerson (Hierarchical branch separate from Staff).
+
+Line 47:     double room, treatment;
+  - 'room': Room stay charges.
+  - 'treatment': Medical treatment fees.
+
+Line 48: (Blank line)
+
+Line 49:     Patient(int id, String name, double room, double treatment) {
+  - Patient constructor.
+
+Line 50:         super(id, name);
+  - Calls HospitalPerson constructor.
+
+Line 51:         this.room = room;
+  - Sets room charge.
+
+Line 52:         this.treatment = treatment;
+  - Sets treatment charge.
+
+Line 53:     }
+  - Closes constructor.
+
+Line 54: (Blank line)
+
+Line 55:     void display() {
+  - Prints patient's bill.
+
+Line 56:         System.out.println("Patient: " + name + " Bill: " + (room + treatment));
+  - Total bill = room + treatment.
+
+Line 57:     }
+  - Closes display().
+
+Line 58: }
+  - Closes Patient class.
+
+Line 59: (Blank line)
+
+Line 60: class Main {
+  - Driver class.
+
+Line 61:     public static void main(String[] args) {
+  - Main entry point.
+
+Line 62:         Doctor d = new Doctor(1, "Arun", 50000, 10);
+  - Doctor Arun: 50000 + (10 * 500) = 55000.0.
+
+Line 63:         Nurse n = new Nurse(2, "Anu", 25000, 5);
+  - Nurse Anu: 25000 + (5 * 300) = 26500.0.
+
+Line 64:         Patient p = new Patient(3, "Ravi", 3000, 5000);
+  - Patient Ravi: 3000 + 5000 = 8000.0.
+
+Line 65:         d.display();
+  - Prints Doctor earnings.
+
+Line 66:         n.display();
+  - Prints Nurse earnings.
+
+Line 67:         p.display();
+  - Prints Patient bill.
+
+Line 68:     }
+  - Closes main().
+
+Line 69: }
+  - Closes Main class.

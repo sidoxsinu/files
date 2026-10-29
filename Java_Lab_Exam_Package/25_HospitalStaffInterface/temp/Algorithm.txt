@@ -1,0 +1,7 @@
+1. Start.
+2. Create interface MedicalStaff with performDuty() and calculateSalary().
+3. Create interface EmergencyDuty with performEmergencyDuty().
+4. Implement MedicalStaff in Doctor and Nurse.
+5. Implement both MedicalStaff and EmergencyDuty in EmergencyDoctor.
+6. In main(), invoke methods through interface references.
+7. Stop.

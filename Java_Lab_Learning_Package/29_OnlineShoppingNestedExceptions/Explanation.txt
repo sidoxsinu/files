@@ -1,0 +1,200 @@
+================================================================================
+PROGRAM 29: ONLINE SHOPPING NESTED EXCEPTIONS
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement nested try-catch blocks in an online order checkout system:
+- Outer try block: Validates product selection. Throws InvalidProductException if ID not found.
+- Inner try block: Validates stock availability. Throws OutOfStockException if quantity requested > stock.
+- Order processing: Deducts stock and prints confirmation.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: import java.util.Scanner;
+2: 
+3: class InvalidProductException extends Exception {
+4:     InvalidProductException(String msg) { super(msg); }
+5: }
+6: 
+7: class OutOfStockException extends Exception {
+8:     OutOfStockException(String msg) { super(msg); }
+9: }
+10: 
+11: class Main {
+12:     static int[] ids = {101, 102};
+13:     static int[] stock = {5, 2};
+14: 
+15:     public static void main(String[] args) {
+16:         Scanner sc = new Scanner(System.in);
+17: 
+18:         try {
+19:             System.out.print("Product ID: ");
+20:             int id = sc.nextInt();
+21: 
+22:             int idx = -1;
+23:             for (int i = 0; i < ids.length; i++) {
+24:                 if (ids[i] == id) idx = i;
+25:             }
+26:             if (idx == -1) throw new InvalidProductException("Product not found");
+27: 
+28:             try {
+29:                 System.out.print("Quantity: ");
+30:                 int qty = sc.nextInt();
+31: 
+32:                 if (qty > stock[idx]) throw new OutOfStockException("Insufficient stock");
+33: 
+34:                 stock[idx] -= qty;
+35:                 System.out.println("Order successful, Remaining stock: " + stock[idx]);
+36: 
+37:             } catch (OutOfStockException e) {
+38:                 System.out.println(e.getMessage());
+39:             }
+40: 
+41:         } catch (InvalidProductException e) {
+42:             System.out.println(e.getMessage());
+43:         } finally {
+44:             System.out.println("Shopping session closed");
+45:             sc.close();
+46:         }
+47:     }
+48: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: import java.util.Scanner;
+  - Imports Scanner.
+
+Line 2: (Blank line)
+
+Line 3: class InvalidProductException extends Exception {
+  - Custom checked exception thrown when an invalid product ID is searched.
+
+Line 4:     InvalidProductException(String msg) { super(msg); }
+  - Constructor passing message to Exception.
+
+Line 5: }
+  - Closes InvalidProductException.
+
+Line 6: (Blank line)
+
+Line 7: class OutOfStockException extends Exception {
+  - Custom checked exception thrown when inventory is lower than requested quantity.
+
+Line 8:     OutOfStockException(String msg) { super(msg); }
+  - Constructor.
+
+Line 9: }
+  - Closes OutOfStockException.
+
+Line 10: (Blank line)
+
+Line 11: class Main {
+  - Defines Main class.
+
+Line 12:     static int[] ids = {101, 102};
+  - Static catalog array of valid product IDs.
+
+Line 13:     static int[] stock = {5, 2};
+  - Corresponding stock levels for product 101 (5 items) and 102 (2 items).
+
+Line 14: (Blank line)
+
+Line 15:     public static void main(String[] args) {
+  - Main method.
+
+Line 16:         Scanner sc = new Scanner(System.in);
+  - Creates Scanner.
+
+Line 17: (Blank line)
+
+Line 18:         try {
+  - OUTER try block: Guards product identification and catalog search.
+
+Line 19:             System.out.print("Product ID: ");
+  - Prompt for product ID.
+
+Line 20:             int id = sc.nextInt();
+  - Reads product ID.
+
+Line 21: (Blank line)
+
+Line 22:             int idx = -1;
+  - Index tracker initialized to -1 (not found).
+
+Line 23:             for (int i = 0; i < ids.length; i++) {
+  - Loops through product catalog.
+
+Line 24:                 if (ids[i] == id) idx = i;
+  - If match found, saves index.
+
+Line 25:             }
+  - Closes loop.
+
+Line 26:             if (idx == -1) throw new InvalidProductException("Product not found");
+  - If product ID does not exist in catalog, throws InvalidProductException, which jumps
+    directly to the OUTER catch block!
+
+Line 27: (Blank line)
+
+Line 28:             try {
+  - INNER try block: Guards quantity verification and order fulfillment.
+
+Line 29:                 System.out.print("Quantity: ");
+  - Prompt for quantity.
+
+Line 30:                 int qty = sc.nextInt();
+  - Reads desired quantity.
+
+Line 31: (Blank line)
+
+Line 32:                 if (qty > stock[idx]) throw new OutOfStockException("Insufficient stock");
+  - Throws OutOfStockException if requested quantity exceeds current inventory.
+
+Line 33: (Blank line)
+
+Line 34:                 stock[idx] -= qty;
+  - Decrements inventory upon successful order.
+
+Line 35:                 System.out.println("Order successful, Remaining stock: " + stock[idx]);
+  - Prints order confirmation.
+
+Line 36: (Blank line)
+
+Line 37:             } catch (OutOfStockException e) {
+  - INNER catch block: Handles inventory shortage locally without terminating outer session.
+
+Line 38:                 System.out.println(e.getMessage());
+  - Prints "Insufficient stock".
+
+Line 39:             }
+  - Closes inner try-catch.
+
+Line 40: (Blank line)
+
+Line 41:         } catch (InvalidProductException e) {
+  - OUTER catch block: Handles invalid product ID lookup.
+
+Line 42:             System.out.println(e.getMessage());
+  - Prints "Product not found".
+
+Line 43:         } finally {
+  - Executes regardless of whether product was found or stock was available.
+
+Line 44:             System.out.println("Shopping session closed");
+  - Session closing message.
+
+Line 45:             sc.close();
+  - Releases Scanner.
+
+Line 46:         }
+  - Closes outer try-catch-finally.
+
+Line 47:     }
+  - Closes main().
+
+Line 48: }
+  - Closes Main class.

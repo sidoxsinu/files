@@ -1,0 +1,2 @@
+Q1: What is the benefit of inheriting common fields from HospitalPerson?
+A1: Code reuse; common fields (id, name) are declared once and shared across all roles.

@@ -1,0 +1,4 @@
+ID: 0, Title: Unknown, Author: Unknown, Price: 0.0
+ID: 101, Title: Java, Author: James, Price: 500.0
+After discount:
+ID: 101, Title: Java, Author: James, Price: 450.0

@@ -1,0 +1,7 @@
+1. Start.
+2. Create class Vehicle with regNo, owner, value.
+3. Create class Car extending Vehicle, calculate premium = value * 0.05.
+4. Create class ElectricCar extending Car, calculate batteryCharge = battery * 100.
+5. In display(), calculate total = premium + batteryCharge and print.
+6. In main(), create ElectricCar and call display().
+7. Stop.

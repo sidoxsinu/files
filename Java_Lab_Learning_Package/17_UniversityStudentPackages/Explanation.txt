@@ -1,0 +1,192 @@
+================================================================================
+PROGRAM 17: UNIVERSITY STUDENT PACKAGES & ACCESS SPECIFIERS
+FILES: Student.java, ResearchStudent.java, Admin.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create packages demonstrating access modifiers in university administration:
+- Package 'college.student': Class Student with:
+  * private: id (accessible via public getId() / setId())
+  * default: dept (accessible via public getDept() / setDept())
+  * protected: cgpa
+  * public: name
+- Package 'college.faculty': Class ResearchStudent extends Student
+  * Accesses protected cgpa and public name in subclass show()
+- Package 'college.admin': Class Admin with main()
+  * Demonstrates public access and getter/setter encapsulation.
+
+================================================================================
+FILE 1: Student.java
+================================================================================
+1: package college.student;
+2: 
+3: public class Student {
+4:     private int id;
+5:     String dept = "CSE";
+6:     protected double cgpa = 8.5;
+7:     public String name = "Arun";
+8: 
+9:     public int getId() { return id; }
+10:     public void setId(int id) { this.id = id; }
+11:     public String getDept() { return dept; }
+12:     public void setDept(String d) { this.dept = d; }
+13: }
+
+--- LINE-BY-LINE EXPLANATION (Student.java) ---
+Line 1: package college.student;
+  - Declares the package 'college.student'.
+
+Line 2: (Blank line)
+
+Line 3: public class Student {
+  - Public class Student accessible across packages.
+
+Line 4:     private int id;
+  - Private member: can only be modified/read through getter/setter.
+
+Line 5:     String dept = "CSE";
+  - Default (package-private) member: visible only within 'college.student'.
+
+Line 6:     protected double cgpa = 8.5;
+  - Protected member: visible within 'college.student' and to subclasses in any package.
+
+Line 7:     public String name = "Arun";
+  - Public member: globally visible.
+
+Line 8: (Blank line)
+
+Line 9:     public int getId() { return id; }
+  - Public getter for private id.
+
+Line 10:    public void setId(int id) { this.id = id; }
+  - Public setter for private id.
+
+Line 11:    public String getDept() { return dept; }
+  - Public getter for default dept.
+
+Line 12:    public void setDept(String d) { this.dept = d; }
+  - Public setter for default dept.
+
+Line 13: }
+  - Closes Student class.
+
+================================================================================
+FILE 2: ResearchStudent.java
+================================================================================
+1: package college.faculty;
+2: 
+3: import college.student.Student;
+4: 
+5: public class ResearchStudent extends Student {
+6:     public void show() {
+7:         System.out.println("Name: " + name + ", CGPA: " + cgpa + ", ID: " + getId());
+8:     }
+9: }
+
+--- LINE-BY-LINE EXPLANATION (ResearchStudent.java) ---
+Line 1: package college.faculty;
+  - Places this class in a different package 'college.faculty'.
+
+Line 2: (Blank line)
+
+Line 3: import college.student.Student;
+  - Imports Student from 'college.student'.
+
+Line 4: (Blank line)
+
+Line 5: public class ResearchStudent extends Student {
+  - Inherits from Student.
+
+Line 6:     public void show() {
+  - Display method.
+
+Line 7:         System.out.println("Name: " + name + ", CGPA: " + cgpa + ", ID: " + getId());
+  - 'name' accessed directly (public).
+  - 'cgpa' accessed directly (protected, allowed in subclass).
+  - 'id' accessed through public getter getId() (since private fields cannot be accessed directly).
+
+Line 8:     }
+  - Closes show().
+
+Line 9: }
+  - Closes ResearchStudent class.
+
+================================================================================
+FILE 3: Admin.java
+================================================================================
+1: package college.admin;
+2: 
+3: import college.student.Student;
+4: import college.faculty.ResearchStudent;
+5: 
+6: public class Admin {
+7:     public static void main(String[] args) {
+8:         Student s = new Student();
+9:         s.setId(101);
+10:         System.out.println("Name: " + s.name);
+11:         System.out.println("ID via getter: " + s.getId());
+12:         System.out.println("Dept via getter: " + s.getDept());
+13: 
+14:         ResearchStudent r = new ResearchStudent();
+15:         r.setId(201);
+16:         r.show();
+17:     }
+18: }
+
+--- LINE-BY-LINE EXPLANATION (Admin.java) ---
+Line 1: package college.admin;
+  - Third distinct package: 'college.admin'.
+
+Line 2: (Blank line)
+
+Line 3: import college.student.Student;
+  - Imports Student class.
+
+Line 4: import college.faculty.ResearchStudent;
+  - Imports ResearchStudent class.
+
+Line 5: (Blank line)
+
+Line 6: public class Admin {
+  - Driver class.
+
+Line 7:     public static void main(String[] args) {
+  - Main method.
+
+Line 8:         Student s = new Student();
+  - Instantiates Student.
+
+Line 9:         s.setId(101);
+  - Sets ID using public setter.
+
+Line 10:        System.out.println("Name: " + s.name);
+  - Direct access to public variable 'name'.
+
+Line 11:        System.out.println("ID via getter: " + s.getId());
+  - Access to private id via public getter.
+
+Line 12:        System.out.println("Dept via getter: " + s.getDept());
+  - Access to default dept via public getter.
+
+Line 13: (Blank line)
+
+Line 14:        ResearchStudent r = new ResearchStudent();
+  - Instantiates ResearchStudent.
+
+Line 15:        r.setId(201);
+  - Sets research student ID to 201.
+
+Line 16:        r.show();
+  - Calls show() to demonstrate subclass access to protected and public fields.
+
+Line 17:    }
+  - Closes main().
+
+Line 18: }
+  - Closes Admin class.
+
+================================================================================
+COMPILATION & EXECUTION IN LINUX TERMINAL
+================================================================================
+javac -d . Student.java ResearchStudent.java Admin.java
+java college.admin.Admin

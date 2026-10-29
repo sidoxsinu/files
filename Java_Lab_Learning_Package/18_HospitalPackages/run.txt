@@ -1,0 +1,2 @@
+javac -d . Patient.java InPatient.java EmergencyPatient.java Main.java
+java hospital.staff.Main

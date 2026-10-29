@@ -1,0 +1,6 @@
+Light: ON
+Power: 0.09 kWh
+Fan: ON
+Power: 0.6 kWh
+AC: ON
+Power: 7.5 kWh

@@ -1,0 +1,2 @@
+Q1: Can an abstract class have constructors?
+A1: Yes, called when subclass instances are created via super().

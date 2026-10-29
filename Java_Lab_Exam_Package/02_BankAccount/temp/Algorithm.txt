@@ -1,0 +1,8 @@
+1. Start.
+2. Create class BankAccount with accNo, name, balance.
+3. Use constructor to initialize members.
+4. In deposit(amount), add amount to balance.
+5. In withdraw(amount), check if amount <= balance; if yes, deduct; else print "Insufficient balance".
+6. In display(), print details and balance.
+7. In main(), create object and demonstrate deposit, withdraw, and display.
+8. Stop.

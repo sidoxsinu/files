@@ -1,0 +1,2 @@
+Q1: What is multilevel inheritance?
+A1: A class extends another derived class, forming an inheritance chain.

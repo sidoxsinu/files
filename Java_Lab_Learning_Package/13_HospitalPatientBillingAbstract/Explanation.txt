@@ -1,0 +1,306 @@
+================================================================================
+PROGRAM 13: HOSPITAL PATIENT BILLING ABSTRACT CLASS
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create an abstract class Patient with abstract method calculateBill().
+Subclasses:
+- InPatient: (room rent * days) + treatment + doctor fee
+- OutPatient: consultation fee + medicine
+- EmergencyPatient: treatment + emergency surcharge + doctor fee
+Demonstrate polymorphic billing across patient categories using an array.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: abstract class Patient {
+2:     int id;
+3:     String name;
+4: 
+5:     Patient(int id, String name) {
+6:         this.id = id;
+7:         this.name = name;
+8:     }
+9: 
+10:     abstract double calculateBill();
+11: 
+12:     void display() {
+13:         System.out.println(name + " (" + id + ") Bill: " + calculateBill());
+14:     }
+15: }
+16: 
+17: class InPatient extends Patient {
+18:     double room, treat, doc;
+19:     int days;
+20: 
+21:     InPatient(int id, String name, double room, double treat, double doc, int days) {
+22:         super(id, name);
+23:         this.room = room;
+24:         this.treat = treat;
+25:         this.doc = doc;
+26:         this.days = days;
+27:     }
+28: 
+29:     double calculateBill() {
+30:         return (room * days) + treat + doc;
+31:     }
+32: }
+33: 
+34: class OutPatient extends Patient {
+35:     double consult, med;
+36: 
+37:     OutPatient(int id, String name, double consult, double med) {
+38:         super(id, name);
+39:         this.consult = consult;
+40:         this.med = med;
+41:     }
+42: 
+43:     double calculateBill() {
+44:         return consult + med;
+45:     }
+46: }
+47: 
+48: class EmergencyPatient extends Patient {
+49:     double treat, emerg, doc;
+50: 
+51:     EmergencyPatient(int id, String name, double treat, double emerg, double doc) {
+52:         super(id, name);
+53:         this.treat = treat;
+54:         this.emerg = emerg;
+55:         this.doc = doc;
+56:     }
+57: 
+58:     double calculateBill() {
+59:         return treat + emerg + doc;
+60:     }
+61: }
+62: 
+63: class Main {
+64:     public static void main(String[] args) {
+65:         Patient[] p = {
+66:             new InPatient(1, "Arun", 2000, 3000, 1000, 2),
+67:             new OutPatient(2, "Anu", 500, 300),
+68:             new EmergencyPatient(3, "Ravi", 3000, 2000, 1000)
+69:         };
+70: 
+71:         for (Patient pt : p) {
+72:             pt.display();
+73:         }
+74:     }
+75: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: abstract class Patient {
+  - Abstract base class for hospital patients.
+
+Line 2:     int id;
+  - Patient ID.
+
+Line 3:     String name;
+  - Patient Name.
+
+Line 4: (Blank line)
+
+Line 5:     Patient(int id, String name) {
+  - Patient base constructor.
+
+Line 6:         this.id = id;
+  - Initializes ID.
+
+Line 7:         this.name = name;
+  - Initializes Name.
+
+Line 8:     }
+  - Closes constructor.
+
+Line 9: (Blank line)
+
+Line 10:    abstract double calculateBill();
+  - Abstract method: Every category of patient has a distinct billing calculation.
+
+Line 11: (Blank line)
+
+Line 12:    void display() {
+  - Prints patient ID, name, and total bill.
+
+Line 13:        System.out.println(name + " (" + id + ") Bill: " + calculateBill());
+  - Invokes polymorphic calculateBill() for the actual subclass object.
+
+Line 14:    }
+  - Closes display().
+
+Line 15: }
+  - Closes Patient class.
+
+Line 16: (Blank line)
+
+Line 17: class InPatient extends Patient {
+  - Concrete class for admitted patients staying in rooms.
+
+Line 18:     double room, treat, doc;
+  - 'room': daily room rent; 'treat': treatment; 'doc': doctor fee.
+
+Line 19:     int days;
+  - Number of days admitted.
+
+Line 20: (Blank line)
+
+Line 21:     InPatient(int id, String name, double room, double treat, double doc, int days) {
+  - InPatient constructor.
+
+Line 22:         super(id, name);
+  - Passes id and name to Patient constructor.
+
+Line 23:         this.room = room;
+  - Sets room rate.
+
+Line 24:         this.treat = treat;
+  - Sets treatment charge.
+
+Line 25:         this.doc = doc;
+  - Sets doctor fee.
+
+Line 26:         this.days = days;
+  - Sets number of days.
+
+Line 27:    }
+  - Closes constructor.
+
+Line 28: (Blank line)
+
+Line 29:    double calculateBill() {
+  - Overrides calculateBill() for InPatient.
+
+Line 30:        return (room * days) + treat + doc;
+  - Bill = (daily room rate * days) + treatment + doctor fee.
+
+Line 31:    }
+  - Closes calculateBill().
+
+Line 32: }
+  - Closes InPatient class.
+
+Line 33: (Blank line)
+
+Line 34: class OutPatient extends Patient {
+  - Concrete class for visiting patients (no room stay).
+
+Line 35:     double consult, med;
+  - 'consult': Consultation fee; 'med': Medicine charges.
+
+Line 36: (Blank line)
+
+Line 37:     OutPatient(int id, String name, double consult, double med) {
+  - OutPatient constructor.
+
+Line 38:         super(id, name);
+  - Calls Patient constructor.
+
+Line 39:         this.consult = consult;
+  - Sets consultation fee.
+
+Line 40:         this.med = med;
+  - Sets medicine fee.
+
+Line 41:    }
+  - Closes constructor.
+
+Line 42: (Blank line)
+
+Line 43:    double calculateBill() {
+  - Overrides calculateBill() for OutPatient.
+
+Line 44:        return consult + med;
+  - Bill = consultation + medicine.
+
+Line 45:    }
+  - Closes calculateBill().
+
+Line 46: }
+  - Closes OutPatient class.
+
+Line 47: (Blank line)
+
+Line 48: class EmergencyPatient extends Patient {
+  - Concrete class for emergency ward cases.
+
+Line 49:     double treat, emerg, doc;
+  - 'treat': Treatment charges; 'emerg': Emergency surcharge; 'doc': Doctor fee.
+
+Line 50: (Blank line)
+
+Line 51:     EmergencyPatient(int id, String name, double treat, double emerg, double doc) {
+  - EmergencyPatient constructor.
+
+Line 52:         super(id, name);
+  - Calls Patient constructor.
+
+Line 53:         this.treat = treat;
+  - Sets treatment charges.
+
+Line 54:         this.emerg = emerg;
+  - Sets emergency surcharge.
+
+Line 55:         this.doc = doc;
+  - Sets doctor fee.
+
+Line 56:    }
+  - Closes constructor.
+
+Line 57: (Blank line)
+
+Line 58:    double calculateBill() {
+  - Overrides calculateBill() for EmergencyPatient.
+
+Line 59:        return treat + emerg + doc;
+  - Bill = treatment + emergency surcharge + doctor fee.
+
+Line 60:    }
+  - Closes calculateBill().
+
+Line 61: }
+  - Closes EmergencyPatient class.
+
+Line 62: (Blank line)
+
+Line 63: class Main {
+  - Driver class.
+
+Line 64:     public static void main(String[] args) {
+  - Main method.
+
+Line 65:         Patient[] p = {
+  - Array of Patient references holding different patient types.
+
+Line 66:             new InPatient(1, "Arun", 2000, 3000, 1000, 2),
+  - InPatient: (2000 * 2) + 3000 + 1000 = 8000.0.
+
+Line 67:             new OutPatient(2, "Anu", 500, 300),
+  - OutPatient: 500 + 300 = 800.0.
+
+Line 68:             new EmergencyPatient(3, "Ravi", 3000, 2000, 1000)
+  - EmergencyPatient: 3000 + 2000 + 1000 = 6000.0.
+
+Line 69:         };
+  - Closes array.
+
+Line 70: (Blank line)
+
+Line 71:         for (Patient pt : p) {
+  - For-each loop traversing patient array.
+
+Line 72:             pt.display();
+  - Displays each patient's bill dynamically.
+
+Line 73:         }
+  - Closes loop.
+
+Line 74:     }
+  - Closes main().
+
+Line 75: }
+  - Closes Main class.

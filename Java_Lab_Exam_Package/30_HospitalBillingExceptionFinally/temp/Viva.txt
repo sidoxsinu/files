@@ -1,0 +1,2 @@
+Q1: What is the difference between throw and throws?
+A1: throw explicitly creates and throws an exception; throws declares that a method may pass an exception to its caller.

@@ -1,0 +1,6 @@
+1. Start.
+2. Create HospitalPerson with id and name.
+3. Derive Staff (salary) and Patient (room, treatment bill) from HospitalPerson.
+4. Derive Doctor (consultation earnings) and Nurse (shift allowance) from Staff.
+5. In main(), create objects for one Doctor, Nurse, and Patient, and call display().
+6. Stop.

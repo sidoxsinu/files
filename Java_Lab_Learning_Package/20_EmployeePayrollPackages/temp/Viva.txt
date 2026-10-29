@@ -1,0 +1,2 @@
+Q1: Can a subclass access a private field of its parent class?
+A1: No, private fields are only accessible within the parent class itself.

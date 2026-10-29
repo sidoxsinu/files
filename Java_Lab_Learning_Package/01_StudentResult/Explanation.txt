@@ -1,0 +1,199 @@
+================================================================================
+PROGRAM 01: STUDENT RESULT MANAGEMENT
+FILE: Student.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create a Student class with attributes roll number, name, and marks in three 
+subjects. Calculate the total and average marks, and display the results for 
+two students.
+
+================================================================================
+COMPLETE SOURCE CODE (Student.java)
+================================================================================
+1: class Student {
+2:     int rollNo;
+3:     String name;
+4:     int m1, m2, m3;
+5: 
+6:     Student(int r, String n, int a, int b, int c) {
+7:         rollNo = r;
+8:         name = n;
+9:         m1 = a;
+10:         m2 = b;
+11:         m3 = c;
+12:     }
+13: 
+14:     int total() {
+15:         return m1 + m2 + m3;
+16:     }
+17: 
+18:     double average() {
+19:         return total() / 3.0;
+20:     }
+21: 
+22:     void display() {
+23:         System.out.println("Roll No: " + rollNo);
+24:         System.out.println("Name: " + name);
+25:         System.out.println("Total: " + total());
+26:         System.out.println("Average: " + average());
+27:     }
+28: 
+29:     public static void main(String[] args) {
+30:         Student s1 = new Student(1, "Arun", 80, 75, 90);
+31:         Student s2 = new Student(2, "Anu", 85, 90, 95);
+32:         s1.display();
+33:         s2.display();
+34:     }
+35: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class Student {
+  - 'class': A reserved keyword in Java used to declare a class. A class is a
+    blueprint or template from which individual objects are created.
+  - 'Student': The user-defined identifier/name given to this class.
+  - '{': The opening curly brace marks the start of the Student class body.
+
+Line 2:     int rollNo;
+  - 'int': A primitive data type that stores 32-bit signed integers (whole numbers).
+  - 'rollNo': An instance variable (field). Every Student object will have its own
+    copy of 'rollNo' to store their unique roll number.
+  - ';': Statement terminator.
+
+Line 3:     String name;
+  - 'String': A built-in reference class in Java (java.lang.String) that stores a
+    sequence of characters (text).
+  - 'name': An instance variable storing the student's name.
+
+Line 4:     int m1, m2, m3;
+  - Declares three integer instance variables 'm1', 'm2', and 'm3' to store marks
+    for Subject 1, Subject 2, and Subject 3 respectively.
+
+Line 5: (Blank line for readability and logical separation)
+
+Line 6:     Student(int r, String n, int a, int b, int c) {
+  - 'Student(...)': A parameterized constructor. A constructor has the EXACT same
+    name as the class and has NO return type (not even void).
+  - 'int r, String n, int a, int b, int c': Five formal parameters passed into the
+    constructor when an object is instantiated using 'new'.
+  - '{': Begins the constructor body.
+
+Line 7:         rollNo = r;
+  - Assigns the parameter value 'r' to the instance variable 'rollNo'.
+
+Line 8:         name = n;
+  - Assigns the parameter value 'n' to the instance variable 'name'.
+
+Line 9:         m1 = a;
+  - Assigns mark 'a' to instance variable 'm1'.
+
+Line 10:        m2 = b;
+  - Assigns mark 'b' to instance variable 'm2'.
+
+Line 11:        m3 = c;
+  - Assigns mark 'c' to instance variable 'm3'.
+
+Line 12:    }
+  - Closes the parameterized constructor block.
+
+Line 13: (Blank line)
+
+Line 14:    int total() {
+  - 'int': Specifies the return type of the method. This method will compute and
+    return an integer value.
+  - 'total': The identifier/name of the method.
+  - '()': Empty parameter list, meaning this method takes no arguments.
+  - '{': Begins the method body.
+
+Line 15:        return m1 + m2 + m3;
+  - 'm1 + m2 + m3': Adds the three subject marks together.
+  - 'return': Keyword that exits the method and passes the calculated sum back to
+    the caller.
+
+Line 16:    }
+  - Closes the total() method block.
+
+Line 17: (Blank line)
+
+Line 18:    double average() {
+  - 'double': Return type. Double precision 64-bit floating point number, used
+    here because the average can be a decimal fraction.
+  - 'average': Method name.
+  - '()': Takes no parameters.
+
+Line 19:        return total() / 3.0;
+  - 'total()': Calls the total() method to get the sum of marks.
+  - '/ 3.0': Divides the sum by 3.0 (a double literal). Dividing by 3.0 forces
+    floating-point division instead of integer truncation.
+  - 'return': Sends the resulting average back to the caller.
+
+Line 20:    }
+  - Closes the average() method block.
+
+Line 21: (Blank line)
+
+Line 22:    void display() {
+  - 'void': Return type indicating that this method does not return any value.
+  - 'display': Method name used to print the student details to the terminal.
+  - '()': Takes no arguments.
+
+Line 23:        System.out.println("Roll No: " + rollNo);
+  - 'System': A built-in final class in java.lang package.
+  - 'out': A static member of System, representing the standard output stream (PrintStream).
+  - 'println': Method of PrintStream that prints the given string followed by a newline.
+  - '"Roll No: " + rollNo': Concatenates the string literal with the value of rollNo.
+
+Line 24:        System.out.println("Name: " + name);
+  - Prints the student's name on a new line.
+
+Line 25:        System.out.println("Total: " + total());
+  - Calls total() and prints the returned sum of marks.
+
+Line 26:        System.out.println("Average: " + average());
+  - Calls average() and prints the calculated average.
+
+Line 27:    }
+  - Closes the display() method block.
+
+Line 28: (Blank line)
+
+Line 29:    public static void main(String[] args) {
+  - 'public': Access modifier allowing the JVM to invoke this method from anywhere.
+  - 'static': Allows JVM to call main() without creating an instance of the class.
+  - 'void': JVM does not expect any return value when the program terminates.
+  - 'main': The predefined entry point of any standalone Java application.
+  - 'String[] args': Array of String objects to receive command-line arguments.
+
+Line 30:        Student s1 = new Student(1, "Arun", 80, 75, 90);
+  - 'Student s1': Declares a reference variable 's1' of type Student.
+  - '=': Assignment operator.
+  - 'new': Operator that allocates heap memory for a new Student object.
+  - 'Student(...)': Invokes the constructor with roll=1, name="Arun", marks=80, 75, 90.
+
+Line 31:        Student s2 = new Student(2, "Anu", 85, 90, 95);
+  - Instantiates a second independent Student object referenced by 's2'.
+
+Line 32:        s1.display();
+  - Calls the display() method on object 's1', printing Arun's details.
+
+Line 33:        s2.display();
+  - Calls the display() method on object 's2', printing Anu's details.
+
+Line 34:    }
+  - Closes the main method.
+
+Line 35: }
+  - Closes the Student class.
+
+================================================================================
+EXECUTION FLOW SUMMARY
+================================================================================
+1. The JVM loads the Student class and executes main().
+2. 's1' object is created in heap memory with values (1, "Arun", 80, 75, 90).
+3. 's2' object is created in heap memory with values (2, "Anu", 85, 90, 95).
+4. s1.display() executes: prints Roll No 1, Name Arun, Total 245, Average 81.67.
+5. s2.display() executes: prints Roll No 2, Name Anu, Total 270, Average 90.0.
+6. Program exits cleanly.

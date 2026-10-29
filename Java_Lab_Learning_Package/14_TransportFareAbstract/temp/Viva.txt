@@ -1,0 +1,2 @@
+Q1: Can an abstract class be declared final?
+A1: No, abstract classes must be subclassed; final prevents subclassing.

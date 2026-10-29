@@ -1,0 +1,7 @@
+1. Start.
+2. Create abstract class Patient with id, name, abstract calculateBill(), display().
+3. Subclass InPatient: (room * days) + treatment + doctor.
+4. Subclass OutPatient: consultation + medicine.
+5. Subclass EmergencyPatient: treatment + emergency + doctor.
+6. In main(), create Patient[] array and display each patient's bill using runtime method dispatch.
+7. Stop.

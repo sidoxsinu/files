@@ -1,0 +1,2 @@
+Q1: How is energy consumption converted to kWh?
+A1: (Watts * Operating Hours) / 1000.0.

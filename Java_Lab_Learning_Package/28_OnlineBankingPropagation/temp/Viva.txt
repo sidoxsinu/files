@@ -1,0 +1,2 @@
+Q1: What is exception propagation?
+A1: Forwarding an uncaught exception up the method call stack to the caller.

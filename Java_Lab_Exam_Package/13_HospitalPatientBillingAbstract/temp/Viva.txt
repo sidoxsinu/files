@@ -1,0 +1,2 @@
+Q1: What is dynamic method dispatch?
+A1: The mechanism by which a call to an overridden method is resolved at runtime.

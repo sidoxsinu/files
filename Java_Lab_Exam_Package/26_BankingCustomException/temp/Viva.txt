@@ -1,0 +1,2 @@
+Q1: What is the purpose of finally?
+A1: To execute cleanup code regardless of whether an exception occurred.

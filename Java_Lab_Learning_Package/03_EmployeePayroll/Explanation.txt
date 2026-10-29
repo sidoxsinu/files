@@ -1,0 +1,141 @@
+================================================================================
+PROGRAM 03: EMPLOYEE PAYROLL SYSTEM
+FILE: Employee.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create an Employee class with employee ID, name, and basic salary. Calculate an
+allowance of 20% on basic salary, compute the gross salary, and display details
+for two employees.
+
+================================================================================
+COMPLETE SOURCE CODE (Employee.java)
+================================================================================
+1: class Employee {
+2:     int id;
+3:     String name;
+4:     double basic, allowance;
+5: 
+6:     Employee(int i, String n, double b) {
+7:         id = i;
+8:         name = n;
+9:         basic = b;
+10:         allowance = basic * 0.20;
+11:     }
+12: 
+13:     double grossSalary() {
+14:         return basic + allowance;
+15:     }
+16: 
+17:     void display() {
+18:         System.out.println("ID: " + id);
+19:         System.out.println("Name: " + name);
+20:         System.out.println("Basic: " + basic);
+21:         System.out.println("Allowance: " + allowance);
+22:         System.out.println("Gross: " + grossSalary());
+23:     }
+24: 
+25:     public static void main(String[] args) {
+26:         Employee e1 = new Employee(1, "Arun", 20000);
+27:         Employee e2 = new Employee(2, "Anu", 30000);
+28:         e1.display();
+29:         e2.display();
+30:     }
+31: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class Employee {
+  - Defines the Employee class.
+
+Line 2:     int id;
+  - Instance variable storing the unique Employee ID.
+
+Line 3:     String name;
+  - Instance variable storing the Employee name.
+
+Line 4:     double basic, allowance;
+  - Declares two double precision instance variables:
+    * 'basic': basic monthly salary.
+    * 'allowance': 20% additional allowance calculated from basic.
+
+Line 5: (Blank line)
+
+Line 6:     Employee(int i, String n, double b) {
+  - Parameterized constructor taking employee id 'i', name 'n', and basic salary 'b'.
+
+Line 7:         id = i;
+  - Initializes employee ID.
+
+Line 8:         name = n;
+  - Initializes employee name.
+
+Line 9:         basic = b;
+  - Initializes basic salary.
+
+Line 10:        allowance = basic * 0.20;
+  - Calculates 20% of basic salary and stores it in the allowance field.
+
+Line 11:    }
+  - Closes constructor.
+
+Line 12: (Blank line)
+
+Line 13:    double grossSalary() {
+  - Method that returns a double representing the total gross pay.
+
+Line 14:        return basic + allowance;
+  - Adds basic salary and allowance together and returns the total gross salary.
+
+Line 15:    }
+  - Closes grossSalary() method.
+
+Line 16: (Blank line)
+
+Line 17:    void display() {
+  - Prints all salary details of this employee.
+
+Line 18:        System.out.println("ID: " + id);
+  - Prints ID.
+
+Line 19:        System.out.println("Name: " + name);
+  - Prints Name.
+
+Line 20:        System.out.println("Basic: " + basic);
+  - Prints Basic Salary.
+
+Line 21:        System.out.println("Allowance: " + allowance);
+  - Prints Allowance amount.
+
+Line 22:        System.out.println("Gross: " + grossSalary());
+  - Calls grossSalary() and prints the calculated gross salary.
+
+Line 23:    }
+  - Closes display() method.
+
+Line 24: (Blank line)
+
+Line 25:    public static void main(String[] args) {
+  - Entry point of the program.
+
+Line 26:        Employee e1 = new Employee(1, "Arun", 20000);
+  - Creates employee 'e1' with ID 1, Arun, Basic 20000.
+  - Allowance automatically calculated as 20000 * 0.20 = 4000.
+
+Line 27:        Employee e2 = new Employee(2, "Anu", 30000);
+  - Creates employee 'e2' with ID 2, Anu, Basic 30000.
+  - Allowance automatically calculated as 30000 * 0.20 = 6000.
+
+Line 28:        e1.display();
+  - Prints e1 details (Gross = 24000.0).
+
+Line 29:        e2.display();
+  - Prints e2 details (Gross = 36000.0).
+
+Line 30:    }
+  - Closes main method.
+
+Line 31: }
+  - Closes Employee class.

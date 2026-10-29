@@ -1,0 +1,6 @@
+1. Start.
+2. Define abstract class Employee with id, name, basic, abstract calculateSalary(), and concrete display().
+3. Define Manager, Developer, Intern subclasses implementing calculateSalary().
+4. In main(), create Employee[] array containing subclass objects.
+5. Loop through array to calculate and display salaries (Runtime Polymorphism).
+6. Stop.

@@ -1,0 +1,2 @@
+Q1: What is interface polymorphism?
+A1: Using an interface type reference to hold an object of any class that implements that interface.

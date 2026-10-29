@@ -1,0 +1,2 @@
+Q1: What are the 4 access specifiers in Java?
+A1: private (class), default (package), protected (package + subclass), public (all).

@@ -1,0 +1,207 @@
+================================================================================
+PROGRAM 16: BANKING PACKAGE & ACCESS SPECIFIERS
+FILES: Account.java, SavingsAccount.java, BankService.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create packages to demonstrate the 4 Java access specifiers:
+- Package 'bank.accounts': Class Account with:
+  * private: accNo, pin (accessible ONLY inside Account class; accessed outside via public getter)
+  * default (package-private): type (accessible only within same package)
+  * protected: balance (accessible within same package and by subclasses in other packages)
+  * public: name (accessible from anywhere)
+- Package 'bank.services':
+  * SavingsAccount extends Account (demonstrates accessing 'protected balance' across packages)
+  * BankService contains main() (demonstrates accessing public and getter methods)
+
+================================================================================
+FILE 1: Account.java
+================================================================================
+1: package bank.accounts;
+2: 
+3: public class Account {
+4:     private int accNo = 101, pin = 1234;
+5:     String type = "Savings";
+6:     protected double balance = 5000;
+7:     public String name = "Arun";
+8: 
+9:     public int getAccNo() { return accNo; }
+10:     public String getType() { return type; }
+11:     public void deposit(double a) { balance += a; }
+12:     public void withdraw(double a) {
+13:         if (a <= balance) balance -= a;
+14:         else System.out.println("Insufficient balance");
+15:     }
+16: }
+
+--- LINE-BY-LINE EXPLANATION (Account.java) ---
+Line 1: package bank.accounts;
+  - 'package': Keyword used to group related classes into a namespace/directory.
+  - 'bank.accounts': Creates a folder structure 'bank/accounts' when compiled with 'javac -d .'.
+
+Line 2: (Blank line)
+
+Line 3: public class Account {
+  - 'public': Class access modifier. A public class is accessible from any other package.
+  - 'class Account': Defines the Account class.
+
+Line 4:     private int accNo = 101, pin = 1234;
+  - 'private': Strictest access specifier. These variables are visible ONLY inside this
+    Account class. Any attempt to access 'a.accNo' or 'a.pin' from another class will cause
+    a compilation error.
+
+Line 5:     String type = "Savings";
+  - Default (no keyword specified) access modifier, also called 'package-private'.
+  - Visible only to classes inside the exact same package ('bank.accounts').
+
+Line 6:     protected double balance = 5000;
+  - 'protected': Accessible within the same package AND by subclasses in different packages
+    via inheritance.
+
+Line 7:     public String name = "Arun";
+  - 'public': Accessible from any class in any package across the application.
+
+Line 8: (Blank line)
+
+Line 9:     public int getAccNo() { return accNo; }
+  - Public getter method: Provides controlled read-only access to the private 'accNo'.
+
+Line 10:    public String getType() { return type; }
+  - Public getter method: Exposes the default 'type' attribute to outside packages.
+
+Line 11:    public void deposit(double a) { balance += a; }
+  - Public method allowing any package to deposit into the account.
+
+Line 12:    public void withdraw(double a) {
+  - Public method allowing withdrawals with balance verification.
+
+Line 13:        if (a <= balance) balance -= a;
+  - Verifies funds and subtracts withdrawal.
+
+Line 14:        else System.out.println("Insufficient balance");
+  - Alerts if balance is inadequate.
+
+Line 15:    }
+  - Closes withdraw() method.
+
+Line 16: }
+  - Closes Account class.
+
+================================================================================
+FILE 2: SavingsAccount.java
+================================================================================
+1: package bank.services;
+2: 
+3: import bank.accounts.Account;
+4: 
+5: public class SavingsAccount extends Account {
+6:     public void show() {
+7:         System.out.println("Subclass access: name=" + name + ", balance=" + balance);
+8:     }
+9: }
+
+--- LINE-BY-LINE EXPLANATION (SavingsAccount.java) ---
+Line 1: package bank.services;
+  - Places SavingsAccount in a DIFFERENT package: 'bank.services'.
+
+Line 2: (Blank line)
+
+Line 3: import bank.accounts.Account;
+  - 'import': Makes the public class 'Account' from package 'bank.accounts' visible
+    to this file.
+
+Line 4: (Blank line)
+
+Line 5: public class SavingsAccount extends Account {
+  - SavingsAccount inherits from Account. Because it is a subclass, it inherits
+    public and protected members across package boundaries.
+
+Line 6:     public void show() {
+  - Method to print accessible attributes.
+
+Line 7:         System.out.println("Subclass access: name=" + name + ", balance=" + balance);
+  - Direct access to 'name' is allowed because it is 'public'.
+  - Direct access to 'balance' is allowed because it is 'protected' and this is a subclass!
+  - Direct access to 'accNo' or 'type' would FAIL compilation here.
+
+Line 8:     }
+  - Closes show().
+
+Line 9: }
+  - Closes SavingsAccount class.
+
+================================================================================
+FILE 3: BankService.java
+================================================================================
+1: package bank.services;
+2: 
+3: import bank.accounts.Account;
+4: 
+5: public class BankService {
+6:     public static void main(String[] args) {
+7:         Account a = new Account();
+8:         System.out.println("Public name: " + a.name);
+9:         System.out.println("Private accNo via getter: " + a.getAccNo());
+10:         System.out.println("Default type via getter: " + a.getType());
+11:         a.deposit(1000);
+12:         a.withdraw(2000);
+13: 
+14:         SavingsAccount s = new SavingsAccount();
+15:         s.show();
+16:     }
+17: }
+
+--- LINE-BY-LINE EXPLANATION (BankService.java) ---
+Line 1: package bank.services;
+  - Package declaration for the driver service.
+
+Line 2: (Blank line)
+
+Line 3: import bank.accounts.Account;
+  - Imports Account class from the accounts package.
+
+Line 4: (Blank line)
+
+Line 5: public class BankService {
+  - Main driver class.
+
+Line 6:     public static void main(String[] args) {
+  - Main method entry point.
+
+Line 7:         Account a = new Account();
+  - Instantiates Account object.
+
+Line 8:         System.out.println("Public name: " + a.name);
+  - Demonstrates public member access: 'a.name' can be accessed directly from any package.
+
+Line 9:         System.out.println("Private accNo via getter: " + a.getAccNo());
+  - Demonstrates private member encapsulation: accessed legally via public getter getAccNo().
+
+Line 10:        System.out.println("Default type via getter: " + a.getType());
+  - Demonstrates accessing package-private member through public getter getType().
+
+Line 11:        a.deposit(1000);
+  - Deposits 1000 via public method. Balance becomes 6000.
+
+Line 12:        a.withdraw(2000);
+  - Withdraws 2000 via public method. Balance becomes 4000.
+
+Line 13: (Blank line)
+
+Line 14:        SavingsAccount s = new SavingsAccount();
+  - Instantiates SavingsAccount object (in the same package 'bank.services').
+
+Line 15:        s.show();
+  - Calls show() which prints the subclass's inherited protected and public fields.
+
+Line 16:    }
+  - Closes main().
+
+Line 17: }
+  - Closes BankService class.
+
+================================================================================
+COMPILATION & EXECUTION IN LINUX TERMINAL
+================================================================================
+javac -d . Account.java SavingsAccount.java BankService.java
+java bank.services.BankService

@@ -1,0 +1,7 @@
+Enter 5 marks:
+80 85 90 75 95
+Enter index to check: 2
+Mark: 90
+Enter count to divide: 5
+Total: 425 Average: 85
+Result processing completed

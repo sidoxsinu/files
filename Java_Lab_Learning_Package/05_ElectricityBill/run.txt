@@ -1,0 +1,2 @@
+javac ElectricityBill.java
+java ElectricityBill

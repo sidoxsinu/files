@@ -1,0 +1,7 @@
+Product ID (101 or 102): 101
+Quantity: 2
+Price: 500
+Total: 1000.0
+Payment: 1200
+Payment Success. Balance: 200.0
+Order processing completed

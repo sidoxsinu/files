@@ -1,0 +1,8 @@
+Patient ID: 101
+Treatment: 3000
+Medicine: 1000
+Room: 2000
+Amount paid: 7000
+Total Bill: 6000.0
+Balance returned: 1000.0
+Billing process completed

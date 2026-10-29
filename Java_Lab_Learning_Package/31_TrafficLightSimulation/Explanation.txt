@@ -1,0 +1,119 @@
+================================================================================
+PROGRAM 31: TRAFFIC LIGHT SIMULATION
+FILE: TrafficLight.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Simulate a traffic light control system using a switch-case statement:
+- Read traffic light color (RED, YELLOW, GREEN) from console input.
+- Convert input to uppercase to handle case-insensitivity.
+- Actions:
+  * RED -> Print "STOP"
+  * YELLOW -> Print "READY"
+  * GREEN -> Print "GO"
+  * Default -> Print "Invalid colour"
+
+================================================================================
+COMPLETE SOURCE CODE (TrafficLight.java)
+================================================================================
+1: import java.util.Scanner;
+2: 
+3: class TrafficLight {
+4:     public static void main(String[] args) {
+5:         Scanner sc = new Scanner(System.in);
+6:         System.out.print("Enter colour (RED/YELLOW/GREEN): ");
+7:         String c = sc.next().toUpperCase();
+8: 
+9:         switch (c) {
+10:             case "RED":
+11:                 System.out.println("STOP");
+12:                 break;
+13:             case "YELLOW":
+14:                 System.out.println("READY");
+15:                 break;
+16:             case "GREEN":
+17:                 System.out.println("GO");
+18:                 break;
+19:             default:
+20:                 System.out.println("Invalid colour");
+21:         }
+22:         sc.close();
+23:     }
+24: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: import java.util.Scanner;
+  - Imports Scanner class from standard java.util library for reading input.
+
+Line 2: (Blank line)
+
+Line 3: class TrafficLight {
+  - Declares the TrafficLight class.
+
+Line 4:     public static void main(String[] args) {
+  - Program entry point.
+
+Line 5:         Scanner sc = new Scanner(System.in);
+  - Creates a Scanner object bound to System.in (standard input / keyboard).
+
+Line 6:         System.out.print("Enter colour (RED/YELLOW/GREEN): ");
+  - Uses print() (without newline) to show a prompt on the terminal.
+
+Line 7:         String c = sc.next().toUpperCase();
+  - 'sc.next()': Reads the next input token (single word) as a String.
+  - '.toUpperCase()': Converts all characters to capital letters, allowing the user
+    to type "red", "Red", or "RED" and have them all match correctly.
+
+Line 8: (Blank line)
+
+Line 9:         switch (c) {
+  - 'switch': Control flow statement comparing variable 'c' against multiple constant values.
+  - In modern Java (Java 7+), switch statements natively support String objects!
+
+Line 10:            case "RED":
+  - Matches if 'c' equals "RED".
+
+Line 11:                System.out.println("STOP");
+  - Prints "STOP".
+
+Line 12:                break;
+  - 'break': Exits the switch block immediately. Prevents fall-through to the next case.
+
+Line 13:            case "YELLOW":
+  - Matches if 'c' equals "YELLOW".
+
+Line 14:                System.out.println("READY");
+  - Prints "READY".
+
+Line 15:                break;
+  - Exits switch block.
+
+Line 16:            case "GREEN":
+  - Matches if 'c' equals "GREEN".
+
+Line 17:                System.out.println("GO");
+  - Prints "GO".
+
+Line 18:                break;
+  - Exits switch block.
+
+Line 19:            default:
+  - 'default': Executes if none of the above case constants matched the input.
+
+Line 20:                System.out.println("Invalid colour");
+  - Informs the user that an unrecognized color was entered.
+
+Line 21:        }
+  - Closes switch statement.
+
+Line 22:        sc.close();
+  - Closes the Scanner instance to release underlying resources.
+
+Line 23:    }
+  - Closes main() method.
+
+Line 24: }
+  - Closes TrafficLight class.

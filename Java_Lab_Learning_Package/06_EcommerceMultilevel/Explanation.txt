@@ -1,0 +1,216 @@
+================================================================================
+PROGRAM 06: E-COMMERCE MULTILEVEL INHERITANCE
+FILE: SmartPhone.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement multilevel inheritance in an e-commerce context:
+- Base class: Product (id, name, price)
+- Intermediate class: ElectronicProduct (warranty, GST) extends Product
+- Derived class: SmartPhone (storage, insurance) extends ElectronicProduct
+Calculate GST, add insurance, and display the final price.
+
+================================================================================
+COMPLETE SOURCE CODE (SmartPhone.java)
+================================================================================
+1: class Product {
+2:     int id;
+3:     String name;
+4:     double price;
+5: 
+6:     Product(int id, String name, double price) {
+7:         this.id = id;
+8:         this.name = name;
+9:         this.price = price;
+10:     }
+11: }
+12: 
+13: class ElectronicProduct extends Product {
+14:     int warranty;
+15:     double gst;
+16: 
+17:     ElectronicProduct(int id, String name, double price, int warranty, double gst) {
+18:         super(id, name, price);
+19:         this.warranty = warranty;
+20:         this.gst = gst;
+21:     }
+22: }
+23: 
+24: class SmartPhone extends ElectronicProduct {
+25:     int storage;
+26:     double insurance;
+27: 
+28:     SmartPhone(int id, String name, double price, int warranty, double gst, int storage, double insurance) {
+29:         super(id, name, price, warranty, gst);
+30:         this.storage = storage;
+31:         this.insurance = insurance;
+32:     }
+33: 
+34:     void display() {
+35:         double gstAmount = price * gst / 100;
+36:         double finalPrice = price + gstAmount + insurance;
+37:         System.out.println("Product: " + name);
+38:         System.out.println("Base Price: " + price);
+39:         System.out.println("Warranty: " + warranty + " years");
+40:         System.out.println("GST: " + gstAmount);
+41:         System.out.println("Storage: " + storage + "GB");
+42:         System.out.println("Insurance: " + insurance);
+43:         System.out.println("Final Price: " + finalPrice);
+44:     }
+45: 
+46:     public static void main(String[] args) {
+47:         SmartPhone s = new SmartPhone(101, "Phone", 20000, 2, 18, 128, 500);
+48:         s.display();
+49:     }
+50: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class Product {
+  - Declares the base class 'Product' at the top of the inheritance chain.
+
+Line 2:     int id;
+  - Instance variable for product identifier.
+
+Line 3:     String name;
+  - Instance variable for product name.
+
+Line 4:     double price;
+  - Instance variable for base product price.
+
+Line 5: (Blank line)
+
+Line 6:     Product(int id, String name, double price) {
+  - Base class constructor initializing common product attributes.
+
+Line 7:         this.id = id;
+  - 'this.id' assigns constructor argument 'id' to the instance field.
+
+Line 8:         this.name = name;
+  - Assigns product name.
+
+Line 9:         this.price = price;
+  - Assigns base price.
+
+Line 10:    }
+  - Closes Product constructor.
+
+Line 11: }
+  - Closes Product class.
+
+Line 12: (Blank line)
+
+Line 13: class ElectronicProduct extends Product {
+  - 'extends': Keyword in Java indicating inheritance. ElectronicProduct inherits
+    all accessible members (id, name, price) from Product.
+  - Represents the middle level in the multilevel inheritance hierarchy.
+
+Line 14:     int warranty;
+  - Specific attribute: warranty period in years.
+
+Line 15:     double gst;
+  - Specific attribute: Goods and Services Tax percentage (e.g., 18.0).
+
+Line 16: (Blank line)
+
+Line 17:     ElectronicProduct(int id, String name, double price, int warranty, double gst) {
+  - Constructor for the intermediate class.
+
+Line 18:         super(id, name, price);
+  - 'super(...)': Invocates the immediate superclass (Product) constructor.
+  - Must be the FIRST statement inside the subclass constructor.
+
+Line 19:         this.warranty = warranty;
+  - Initializes warranty field.
+
+Line 20:         this.gst = gst;
+  - Initializes GST percentage field.
+
+Line 21:    }
+  - Closes ElectronicProduct constructor.
+
+Line 22: }
+  - Closes ElectronicProduct class.
+
+Line 23: (Blank line)
+
+Line 24: class SmartPhone extends ElectronicProduct {
+  - SmartPhone inherits from ElectronicProduct (which in turn inherits from Product).
+  - This forms a 3-level hierarchy: Product -> ElectronicProduct -> SmartPhone.
+
+Line 25:     int storage;
+  - Leaf class attribute: storage capacity in gigabytes (GB).
+
+Line 26:     double insurance;
+  - Leaf class attribute: insurance fee in rupees.
+
+Line 27: (Blank line)
+
+Line 28:     SmartPhone(int id, String name, double price, int warranty, double gst, int storage, double insurance) {
+  - Constructor taking all attributes across the entire hierarchy.
+
+Line 29:         super(id, name, price, warranty, gst);
+  - Calls ElectronicProduct constructor passing the first 5 parameters.
+
+Line 30:         this.storage = storage;
+  - Sets phone storage.
+
+Line 31:         this.insurance = insurance;
+  - Sets phone insurance.
+
+Line 32:    }
+  - Closes SmartPhone constructor.
+
+Line 33: (Blank line)
+
+Line 34:     void display() {
+  - Method to compute derived financial values and print the complete breakdown.
+
+Line 35:         double gstAmount = price * gst / 100;
+  - Computes GST amount: price (from Product) multiplied by gst rate (from ElectronicProduct).
+
+Line 36:         double finalPrice = price + gstAmount + insurance;
+  - Computes total cost by combining base price, GST amount, and insurance fee.
+
+Line 37:         System.out.println("Product: " + name);
+  - Prints inherited 'name'.
+
+Line 38:         System.out.println("Base Price: " + price);
+  - Prints inherited 'price'.
+
+Line 39:         System.out.println("Warranty: " + warranty + " years");
+  - Prints inherited 'warranty'.
+
+Line 40:         System.out.println("GST: " + gstAmount);
+  - Prints calculated GST amount.
+
+Line 41:         System.out.println("Storage: " + storage + "GB");
+  - Prints storage.
+
+Line 42:         System.out.println("Insurance: " + insurance);
+  - Prints insurance amount.
+
+Line 43:         System.out.println("Final Price: " + finalPrice);
+  - Prints final price.
+
+Line 44:    }
+  - Closes display() method.
+
+Line 45: (Blank line)
+
+Line 46:     public static void main(String[] args) {
+  - Program entry point.
+
+Line 47:         SmartPhone s = new SmartPhone(101, "Phone", 20000, 2, 18, 128, 500);
+  - Instantiates SmartPhone with ID 101, Name "Phone", Base 20000, Warranty 2 yrs, GST 18%, Storage 128GB, Insurance 500.
+
+Line 48:         s.display();
+  - Calls display() to output the bill calculation.
+
+Line 49:    }
+  - Closes main method.
+
+Line 50: }
+  - Closes SmartPhone class.

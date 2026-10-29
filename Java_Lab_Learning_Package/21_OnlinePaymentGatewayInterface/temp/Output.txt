@@ -1,0 +1,3 @@
+UPI Payment: 1000.0
+UPI receipt generated
+UPI Refund: 500.0

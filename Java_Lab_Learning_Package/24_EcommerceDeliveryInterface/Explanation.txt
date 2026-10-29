@@ -1,0 +1,196 @@
+================================================================================
+PROGRAM 24: E-COMMERCE DELIVERY INTERFACE
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement delivery options using multiple interfaces:
+- Interface 1: DeliveryService (calculateDeliveryCharge(dist, wt), estimateDeliveryTime())
+- Interface 2: Trackable (trackOrder(), updateLocation(loc))
+- Implementing classes:
+  * StandardDelivery: dist*2 + wt*10, 5 days
+  * ExpressDelivery: dist*5 + wt*20, 2 days
+  * InternationalDelivery: dist*10 + wt*30 + 500 customs fee, 10 days
+Demonstrate polymorphism and interface casting.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: interface DeliveryService {
+2:     double calculateDeliveryCharge(double dist, double wt);
+3:     String estimateDeliveryTime();
+4: }
+5: 
+6: interface Trackable {
+7:     void trackOrder();
+8:     void updateLocation(String loc);
+9: }
+10: 
+11: class StandardDelivery implements DeliveryService, Trackable {
+12:     String loc = "Hub";
+13:     public double calculateDeliveryCharge(double d, double w) { return d * 2 + w * 10; }
+14:     public String estimateDeliveryTime() { return "5 days"; }
+15:     public void trackOrder() { System.out.println("Standard: " + loc); }
+16:     public void updateLocation(String l) { loc = l; }
+17: }
+18: 
+19: class ExpressDelivery implements DeliveryService, Trackable {
+20:     String loc = "Hub";
+21:     public double calculateDeliveryCharge(double d, double w) { return d * 5 + w * 20; }
+22:     public String estimateDeliveryTime() { return "2 days"; }
+23:     public void trackOrder() { System.out.println("Express: " + loc); }
+24:     public void updateLocation(String l) { loc = l; }
+25: }
+26: 
+27: class InternationalDelivery implements DeliveryService, Trackable {
+28:     String loc = "Hub";
+29:     public double calculateDeliveryCharge(double d, double w) { return d * 10 + w * 30 + 500; }
+30:     public String estimateDeliveryTime() { return "10 days"; }
+31:     public void trackOrder() { System.out.println("International: " + loc); }
+32:     public void updateLocation(String l) { loc = l; }
+33: }
+34: 
+35: class Main {
+36:     public static void main(String[] args) {
+37:         DeliveryService d = new ExpressDelivery();
+38:         System.out.println("Charge: " + d.calculateDeliveryCharge(10, 2));
+39:         System.out.println("Time: " + d.estimateDeliveryTime());
+40: 
+41:         Trackable t = (Trackable) d;
+42:         t.updateLocation("Kochi");
+43:         t.trackOrder();
+44:     }
+45: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: interface DeliveryService {
+  - Defines the delivery operations interface.
+
+Line 2:     double calculateDeliveryCharge(double dist, double wt);
+  - Takes distance 'dist' in km and package weight 'wt' in kg, returning fee.
+
+Line 3:     String estimateDeliveryTime();
+  - Returns estimated shipping duration string.
+
+Line 4: }
+  - Closes DeliveryService interface.
+
+Line 5: (Blank line)
+
+Line 6: interface Trackable {
+  - Second interface for shipment tracking capability.
+
+Line 7:     void trackOrder();
+  - Prints current shipment location.
+
+Line 8:     void updateLocation(String loc);
+  - Updates current location.
+
+Line 9: }
+  - Closes Trackable interface.
+
+Line 10: (Blank line)
+
+Line 11: class StandardDelivery implements DeliveryService, Trackable {
+  - Standard economy shipping option.
+
+Line 12:     String loc = "Hub";
+  - Current parcel location, initialized to "Hub".
+
+Line 13:     public double calculateDeliveryCharge(double d, double w) { return d * 2 + w * 10; }
+  - Rate: Rs. 2/km + Rs. 10/kg.
+
+Line 14:     public String estimateDeliveryTime() { return "5 days"; }
+  - Estimated time: 5 days.
+
+Line 15:     public void trackOrder() { System.out.println("Standard: " + loc); }
+  - Prints tracking location for standard parcel.
+
+Line 16:     public void updateLocation(String l) { loc = l; }
+  - Updates location to 'l'.
+
+Line 17: }
+  - Closes StandardDelivery class.
+
+Line 18: (Blank line)
+
+Line 19: class ExpressDelivery implements DeliveryService, Trackable {
+  - Express priority shipping option.
+
+Line 20:     String loc = "Hub";
+  - Parcel location.
+
+Line 21:     public double calculateDeliveryCharge(double d, double w) { return d * 5 + w * 20; }
+  - Rate: Rs. 5/km + Rs. 20/kg.
+
+Line 22:     public String estimateDeliveryTime() { return "2 days"; }
+  - Estimated time: 2 days.
+
+Line 23:     public void trackOrder() { System.out.println("Express: " + loc); }
+  - Prints express tracking status.
+
+Line 24:     public void updateLocation(String l) { loc = l; }
+  - Updates location.
+
+Line 25: }
+  - Closes ExpressDelivery class.
+
+Line 26: (Blank line)
+
+Line 27: class InternationalDelivery implements DeliveryService, Trackable {
+  - Cross-border international shipping option.
+
+Line 28:     String loc = "Hub";
+  - Parcel location.
+
+Line 29:     public double calculateDeliveryCharge(double d, double w) { return d * 10 + w * 30 + 500; }
+  - Rate: Rs. 10/km + Rs. 30/kg + Rs. 500 customs handling fee.
+
+Line 30:     public String estimateDeliveryTime() { return "10 days"; }
+  - Estimated time: 10 days.
+
+Line 31:     public void trackOrder() { System.out.println("International: " + loc); }
+  - Prints international tracking status.
+
+Line 32:     public void updateLocation(String l) { loc = l; }
+  - Updates location.
+
+Line 33: }
+  - Closes InternationalDelivery class.
+
+Line 34: (Blank line)
+
+Line 35: class Main {
+  - Driver class.
+
+Line 36:     public static void main(String[] args) {
+  - Main method.
+
+Line 37:         DeliveryService d = new ExpressDelivery();
+  - Reference of DeliveryService assigned an ExpressDelivery instance.
+
+Line 38:         System.out.println("Charge: " + d.calculateDeliveryCharge(10, 2));
+  - Calculates charge for 10km, 2kg: (10 * 5) + (2 * 20) = 50 + 40 = 90.0.
+
+Line 39:         System.out.println("Time: " + d.estimateDeliveryTime());
+  - Prints estimated time ("2 days").
+
+Line 40: (Blank line)
+
+Line 41:         Trackable t = (Trackable) d;
+  - Casts reference 'd' to interface 'Trackable'.
+
+Line 42:         t.updateLocation("Kochi");
+  - Updates location to "Kochi".
+
+Line 43:         t.trackOrder();
+  - Prints "Express: Kochi".
+
+Line 44:     }
+  - Closes main().
+
+Line 45: }
+  - Closes Main class.

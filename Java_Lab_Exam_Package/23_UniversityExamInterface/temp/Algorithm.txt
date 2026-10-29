@@ -1,0 +1,6 @@
+1. Start.
+2. Create interface Evaluatable (total, average, grade).
+3. Create interface Reportable (generateReport).
+4. Implement both in EngineeringStudent (theory + lab) and ManagementStudent (theory + project).
+5. In main(), create Reportable references and invoke generateReport().
+6. Stop.

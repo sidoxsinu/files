@@ -1,0 +1,7 @@
+1. Start.
+2. Create class Employee with id, name, basic, allowance.
+3. Initialize in constructor and calculate allowance = basic * 0.20.
+4. Define grossSalary() returning basic + allowance.
+5. Define display() to print id, name, basic, allowance, and gross salary.
+6. In main(), create two Employee objects and call display().
+7. Stop.

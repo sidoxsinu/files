@@ -1,0 +1,6 @@
+1. Start.
+2. Create superclass Staff with id, name, basic, and calculateSalary().
+3. Create subclasses Professor, LabAssistant, Clerk extending Staff.
+4. Override calculateSalary() in each subclass with its specific allowances.
+5. In main(), create objects of subclasses using Staff references and display salaries.
+6. Stop.

@@ -1,0 +1,148 @@
+================================================================================
+PROGRAM 05: ELECTRICITY BILL CALCULATOR
+FILE: ElectricityBill.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create an ElectricityBill class to calculate electricity bills based on units consumed:
+- Up to 100 units: Rs. 2 per unit
+- Next 100 units (101 to 200): Rs. 3 per unit
+- Above 200 units: Rs. 5 per unit
+Demonstrate slab calculation for multiple consumers.
+
+================================================================================
+COMPLETE SOURCE CODE (ElectricityBill.java)
+================================================================================
+1: class ElectricityBill {
+2:     int no, units;
+3:     String name;
+4:     double bill;
+5: 
+6:     ElectricityBill(int no, String name, int units) {
+7:         this.no = no;
+8:         this.name = name;
+9:         this.units = units;
+10:         calculate();
+11:     }
+12: 
+13:     void calculate() {
+14:         if (units <= 100) bill = units * 2;
+15:         else if (units <= 200) bill = 100 * 2 + (units - 100) * 3;
+16:         else bill = 100 * 2 + 100 * 3 + (units - 200) * 5;
+17:     }
+18: 
+19:     void display() {
+20:         System.out.println("Consumer: " + no + " Name: " + name + " Units: " + units + " Bill: " + bill);
+21:     }
+22: 
+23:     public static void main(String[] args) {
+24:         ElectricityBill e1 = new ElectricityBill(101, "Arun", 75);
+25:         ElectricityBill e2 = new ElectricityBill(102, "Anu", 150);
+26:         ElectricityBill e3 = new ElectricityBill(103, "Ravi", 250);
+27:         e1.display();
+28:         e2.display();
+29:         e3.display();
+30:     }
+31: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class ElectricityBill {
+  - Defines the ElectricityBill class.
+
+Line 2:     int no, units;
+  - Instance variables:
+    * 'no': Consumer account number.
+    * 'units': Total electricity units consumed.
+
+Line 3:     String name;
+  - Instance variable storing the consumer's name.
+
+Line 4:     double bill;
+  - Instance variable storing the computed bill amount.
+
+Line 5: (Blank line)
+
+Line 6:     ElectricityBill(int no, String name, int units) {
+  - Constructor taking consumer number 'no', name 'name', and units consumed 'units'.
+
+Line 7:         this.no = no;
+  - 'this': A reference variable in Java that refers to the current object.
+  - 'this.no' refers to the instance variable, while 'no' refers to the method parameter.
+  - Resolves variable shadowing.
+
+Line 8:         this.name = name;
+  - Assigns parameter 'name' to instance variable 'this.name'.
+
+Line 9:         this.units = units;
+  - Assigns parameter 'units' to instance variable 'this.units'.
+
+Line 10:        calculate();
+  - Automatically invokes the calculate() method immediately during object initialization.
+
+Line 11:    }
+  - Closes constructor.
+
+Line 12: (Blank line)
+
+Line 13:    void calculate() {
+  - Method containing the tiered tariff slab logic.
+
+Line 14:        if (units <= 100) bill = units * 2;
+  - First slab: If units consumed are 100 or less, charge Rs. 2 per unit.
+
+Line 15:        else if (units <= 200) bill = 100 * 2 + (units - 100) * 3;
+  - Second slab: If units are between 101 and 200:
+    * The first 100 units cost 100 * 2 = Rs. 200.
+    * The remaining units (units - 100) cost Rs. 3 per unit.
+
+Line 16:        else bill = 100 * 2 + 100 * 3 + (units - 200) * 5;
+  - Third slab: If units exceed 200:
+    * First 100 units cost 100 * 2 = 200.
+    * Next 100 units cost 100 * 3 = 300.
+    * Any remaining units above 200 (units - 200) cost Rs. 5 per unit.
+
+Line 17:    }
+  - Closes calculate() method.
+
+Line 18: (Blank line)
+
+Line 19:    void display() {
+  - Prints the consumer bill summary.
+
+Line 20:        System.out.println("Consumer: " + no + " Name: " + name + " Units: " + units + " Bill: " + bill);
+  - Prints consumer number, name, units, and total bill.
+
+Line 21:    }
+  - Closes display() method.
+
+Line 22: (Blank line)
+
+Line 23:    public static void main(String[] args) {
+  - Program entry point.
+
+Line 24:        ElectricityBill e1 = new ElectricityBill(101, "Arun", 75);
+  - Creates e1 with 75 units: Slab 1 applies -> 75 * 2 = 150.0.
+
+Line 25:        ElectricityBill e2 = new ElectricityBill(102, "Anu", 150);
+  - Creates e2 with 150 units: Slab 2 applies -> (100 * 2) + (50 * 3) = 200 + 150 = 350.0.
+
+Line 26:        ElectricityBill e3 = new ElectricityBill(103, "Ravi", 250);
+  - Creates e3 with 250 units: Slab 3 applies -> (100 * 2) + (100 * 3) + (50 * 5) = 200 + 300 + 250 = 750.0.
+
+Line 27:        e1.display();
+  - Prints e1 bill (150.0).
+
+Line 28:        e2.display();
+  - Prints e2 bill (350.0).
+
+Line 29:        e3.display();
+  - Prints e3 bill (750.0).
+
+Line 30:    }
+  - Closes main method.
+
+Line 31: }
+  - Closes ElectricityBill class.

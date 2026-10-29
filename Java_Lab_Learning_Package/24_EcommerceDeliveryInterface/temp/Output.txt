@@ -1,0 +1,3 @@
+Charge: 90.0
+Time: 2 days
+Express: Kochi

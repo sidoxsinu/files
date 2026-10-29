@@ -1,0 +1,255 @@
+================================================================================
+PROGRAM 15: PAYMENT TRANSACTION ABSTRACT CLASS
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create an abstract class Payment with transaction ID, amount, and an abstract method
+processPayment().
+Subclasses:
+- CreditCardPayment: 2% processing fee, Rs. 100 reward points if amount >= 5000
+- UPIPayment: 0.5% fee, Rs. 50 cashback if amount >= 1000
+- NetBankingPayment: Rs. 20 flat fee, Rs. 100 discount if amount >= 5000
+Execute transactions polymorphically via an array of payments.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: abstract class Payment {
+2:     int id;
+3:     double amount;
+4: 
+5:     Payment(int id, double amount) {
+6:         this.id = id;
+7:         this.amount = amount;
+8:     }
+9: 
+10:     abstract void processPayment();
+11: }
+12: 
+13: class CreditCardPayment extends Payment {
+14:     CreditCardPayment(int id, double amount) {
+15:         super(id, amount);
+16:     }
+17: 
+18:     void processPayment() {
+19:         double fee = amount * 0.02;
+20:         double reward = amount >= 5000 ? 100 : 0;
+21:         System.out.println("Credit Card Final: " + (amount + fee - reward));
+22:     }
+23: }
+24: 
+25: class UPIPayment extends Payment {
+26:     UPIPayment(int id, double amount) {
+27:         super(id, amount);
+28:     }
+29: 
+30:     void processPayment() {
+31:         double fee = amount * 0.005;
+32:         double cashback = amount >= 1000 ? 50 : 0;
+33:         System.out.println("UPI Final: " + (amount + fee - cashback));
+34:     }
+35: }
+36: 
+37: class NetBankingPayment extends Payment {
+38:     NetBankingPayment(int id, double amount) {
+39:         super(id, amount);
+40:     }
+41: 
+42:     void processPayment() {
+43:         double fee = 20;
+44:         double disc = amount >= 5000 ? 100 : 0;
+45:         System.out.println("NetBanking Final: " + (amount + fee - disc));
+46:     }
+47: }
+48: 
+49: class Main {
+50:     public static void main(String[] args) {
+51:         Payment[] p = {
+52:             new CreditCardPayment(1, 5000),
+53:             new UPIPayment(2, 2000),
+54:             new NetBankingPayment(3, 6000)
+55:         };
+56: 
+57:         for (Payment pay : p) {
+58:             pay.processPayment();
+59:         }
+60:     }
+61: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: abstract class Payment {
+  - Abstract base class for all payment transaction types.
+
+Line 2:     int id;
+  - Transaction ID.
+
+Line 3:     double amount;
+  - Transaction amount.
+
+Line 4: (Blank line)
+
+Line 5:     Payment(int id, double amount) {
+  - Payment constructor.
+
+Line 6:         this.id = id;
+  - Sets ID.
+
+Line 7:         this.amount = amount;
+  - Sets amount.
+
+Line 8:     }
+  - Closes constructor.
+
+Line 9: (Blank line)
+
+Line 10:    abstract void processPayment();
+  - Abstract method: Every payment gateway must implement its own fee and discount rules.
+
+Line 11: }
+  - Closes Payment class.
+
+Line 12: (Blank line)
+
+Line 13: class CreditCardPayment extends Payment {
+  - Subclass for Credit Card transactions.
+
+Line 14:     CreditCardPayment(int id, double amount) {
+  - Constructor.
+
+Line 15:         super(id, amount);
+  - Calls Payment constructor.
+
+Line 16:     }
+  - Closes constructor.
+
+Line 17: (Blank line)
+
+Line 18:    void processPayment() {
+  - Implements processPayment() for Credit Card.
+
+Line 19:        double fee = amount * 0.02;
+  - 2% credit card processing fee.
+
+Line 20:        double reward = amount >= 5000 ? 100 : 0;
+  - Rs. 100 reward points if transaction is Rs. 5000 or greater.
+
+Line 21:        System.out.println("Credit Card Final: " + (amount + fee - reward));
+  - Prints final net charge: amount + fee - reward.
+
+Line 22:    }
+  - Closes processPayment().
+
+Line 23: }
+  - Closes CreditCardPayment class.
+
+Line 24: (Blank line)
+
+Line 25: class UPIPayment extends Payment {
+  - Subclass for Unified Payments Interface (UPI) transactions.
+
+Line 26:     UPIPayment(int id, double amount) {
+  - Constructor.
+
+Line 27:         super(id, amount);
+  - Calls Payment constructor.
+
+Line 28:     }
+  - Closes constructor.
+
+Line 29: (Blank line)
+
+Line 30:    void processPayment() {
+  - Implements processPayment() for UPI.
+
+Line 31:        double fee = amount * 0.005;
+  - 0.5% UPI processing fee.
+
+Line 32:        double cashback = amount >= 1000 ? 50 : 0;
+  - Rs. 50 cashback if amount is at least 1000.
+
+Line 33:        System.out.println("UPI Final: " + (amount + fee - cashback));
+  - Prints final net charge: amount + fee - cashback.
+
+Line 34:    }
+  - Closes processPayment().
+
+Line 35: }
+  - Closes UPIPayment class.
+
+Line 36: (Blank line)
+
+Line 37: class NetBankingPayment extends Payment {
+  - Subclass for Net Banking transactions.
+
+Line 38:     NetBankingPayment(int id, double amount) {
+  - Constructor.
+
+Line 39:         super(id, amount);
+  - Calls Payment constructor.
+
+Line 40:     }
+  - Closes constructor.
+
+Line 41: (Blank line)
+
+Line 42:    void processPayment() {
+  - Implements processPayment() for Net Banking.
+
+Line 43:        double fee = 20;
+  - Flat Rs. 20 convenience charge.
+
+Line 44:        double disc = amount >= 5000 ? 100 : 0;
+  - Rs. 100 discount if amount is at least 5000.
+
+Line 45:        System.out.println("NetBanking Final: " + (amount + fee - disc));
+  - Prints final net charge: amount + fee - disc.
+
+Line 46:    }
+  - Closes processPayment().
+
+Line 47: }
+  - Closes NetBankingPayment class.
+
+Line 48: (Blank line)
+
+Line 49: class Main {
+  - Driver class.
+
+Line 50:     public static void main(String[] args) {
+  - Main method.
+
+Line 51:         Payment[] p = {
+  - Array of Payment references.
+
+Line 52:             new CreditCardPayment(1, 5000),
+  - Credit Card (5000): Fee = 100, Reward = 100 -> Net = 5000.0.
+
+Line 53:             new UPIPayment(2, 2000),
+  - UPI (2000): Fee = 10, Cashback = 50 -> Net = 1960.0.
+
+Line 54:             new NetBankingPayment(3, 6000)
+  - NetBanking (6000): Fee = 20, Discount = 100 -> Net = 5920.0.
+
+Line 55:         };
+  - Closes array.
+
+Line 56: (Blank line)
+
+Line 57:         for (Payment pay : p) {
+  - Iterates through payments.
+
+Line 58:             pay.processPayment();
+  - Processes and prints each transaction polymorphically.
+
+Line 59:         }
+  - Closes loop.
+
+Line 60:     }
+  - Closes main().
+
+Line 61: }
+  - Closes Main class.

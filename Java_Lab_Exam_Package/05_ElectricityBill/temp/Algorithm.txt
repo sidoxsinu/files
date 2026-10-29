@@ -1,0 +1,8 @@
+1. Start.
+2. Create class ElectricityBill with consumer no, name, units, bill.
+3. In calculate():
+   - if units <= 100: bill = units * 2
+   - else if units <= 200: bill = 200 + (units - 100) * 3
+   - else: bill = 500 + (units - 200) * 5
+4. In main(), create objects for different unit ranges and display results.
+5. Stop.

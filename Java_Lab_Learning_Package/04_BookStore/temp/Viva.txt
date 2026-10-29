@@ -1,0 +1,2 @@
+Q1: What is constructor overloading?
+A1: Having more than one constructor in a class with different parameter lists.

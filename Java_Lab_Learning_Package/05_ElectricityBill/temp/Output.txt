@@ -1,0 +1,3 @@
+Consumer: 101 Name: Arun Units: 75 Bill: 150.0
+Consumer: 102 Name: Anu Units: 150 Bill: 350.0
+Consumer: 103 Name: Ravi Units: 250 Bill: 750.0

@@ -1,0 +1,4 @@
+Name: Arun
+ID via getter: 101
+Dept via getter: CSE
+Name: Arun, CGPA: 8.5, ID: 201

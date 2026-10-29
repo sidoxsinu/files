@@ -1,0 +1,197 @@
+================================================================================
+PROGRAM 22: SMART HOME INTERFACE
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement smart home devices using multiple interfaces:
+- Interface 1: SmartDevice (turnOn(), turnOff(), displayStatus())
+- Interface 2: EnergyMonitor (calculatePowerConsumption() returning energy in kWh)
+- Classes implementing both interfaces:
+  * SmartLight: 15W rating for 6 hours daily -> (15 * 6) / 1000 = 0.09 kWh
+  * SmartFan: 75W rating for 8 hours daily -> (75 * 8) / 1000 = 0.6 kWh
+  * SmartAC: 1500W rating for 5 hours daily -> (1500 * 5) / 1000 = 7.5 kWh
+Use an array of SmartDevice and interface casting to show status and power consumption.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: interface SmartDevice {
+2:     void turnOn();
+3:     void turnOff();
+4:     void displayStatus();
+5: }
+6: 
+7: interface EnergyMonitor {
+8:     double calculatePowerConsumption();
+9: }
+10: 
+11: class SmartLight implements SmartDevice, EnergyMonitor {
+12:     boolean on = false;
+13:     public void turnOn() { on = true; }
+14:     public void turnOff() { on = false; }
+15:     public void displayStatus() { System.out.println("Light: " + (on ? "ON" : "OFF")); }
+16:     public double calculatePowerConsumption() { return on ? (15 * 6) / 1000.0 : 0; }
+17: }
+18: 
+19: class SmartFan implements SmartDevice, EnergyMonitor {
+20:     boolean on = false;
+21:     public void turnOn() { on = true; }
+22:     public void turnOff() { on = false; }
+23:     public void displayStatus() { System.out.println("Fan: " + (on ? "ON" : "OFF")); }
+24:     public double calculatePowerConsumption() { return on ? (75 * 8) / 1000.0 : 0; }
+25: }
+26: 
+27: class SmartAC implements SmartDevice, EnergyMonitor {
+28:     boolean on = false;
+29:     int hours = 5;
+30:     public void turnOn() { on = true; }
+31:     public void turnOff() { on = false; }
+32:     public void displayStatus() { System.out.println("AC: " + (on ? "ON" : "OFF")); }
+33:     public double calculatePowerConsumption() { return on ? (1500 * hours) / 1000.0 : 0; }
+34: }
+35: 
+36: class Main {
+37:     public static void main(String[] args) {
+38:         SmartDevice[] d = { new SmartLight(), new SmartFan(), new SmartAC() };
+39:         for (SmartDevice dev : d) {
+40:             dev.turnOn();
+41:             dev.displayStatus();
+42:             System.out.println("Power: " + ((EnergyMonitor) dev).calculatePowerConsumption() + " kWh");
+43:         }
+44:     }
+45: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: interface SmartDevice {
+  - Interface defining standard operations for any smart device.
+
+Line 2:     void turnOn();
+  - Method to turn on device.
+
+Line 3:     void turnOff();
+  - Method to turn off device.
+
+Line 4:     void displayStatus();
+  - Method to display current status (ON/OFF).
+
+Line 5: }
+  - Closes SmartDevice interface.
+
+Line 6: (Blank line)
+
+Line 7: interface EnergyMonitor {
+  - Second interface for monitoring electrical power consumption.
+
+Line 8:     double calculatePowerConsumption();
+  - Method returning energy consumption in kilowatt-hours (kWh).
+
+Line 9: }
+  - Closes EnergyMonitor interface.
+
+Line 10: (Blank line)
+
+Line 11: class SmartLight implements SmartDevice, EnergyMonitor {
+  - Implements both SmartDevice and EnergyMonitor for lighting.
+
+Line 12:     boolean on = false;
+  - State variable: false = OFF, true = ON.
+
+Line 13:     public void turnOn() { on = true; }
+  - Sets state to true.
+
+Line 14:     public void turnOff() { on = false; }
+  - Sets state to false.
+
+Line 15:     public void displayStatus() { System.out.println("Light: " + (on ? "ON" : "OFF")); }
+  - Prints status: "Light: ON" or "Light: OFF".
+
+Line 16:     public double calculatePowerConsumption() { return on ? (15 * 6) / 1000.0 : 0; }
+  - 15 Watts * 6 hours / 1000 = 0.09 kWh when ON; 0 when OFF.
+
+Line 17: }
+  - Closes SmartLight class.
+
+Line 18: (Blank line)
+
+Line 19: class SmartFan implements SmartDevice, EnergyMonitor {
+  - Implements both interfaces for ceiling fan.
+
+Line 20:     boolean on = false;
+  - Fan power state.
+
+Line 21:     public void turnOn() { on = true; }
+  - Turns fan ON.
+
+Line 22:     public void turnOff() { on = false; }
+  - Turns fan OFF.
+
+Line 23:     public void displayStatus() { System.out.println("Fan: " + (on ? "ON" : "OFF")); }
+  - Displays fan status.
+
+Line 24:     public double calculatePowerConsumption() { return on ? (75 * 8) / 1000.0 : 0; }
+  - 75 Watts * 8 hours / 1000 = 0.6 kWh when ON; 0 when OFF.
+
+Line 25: }
+  - Closes SmartFan class.
+
+Line 26: (Blank line)
+
+Line 27: class SmartAC implements SmartDevice, EnergyMonitor {
+  - Implements both interfaces for air conditioner.
+
+Line 28:     boolean on = false;
+  - AC power state.
+
+Line 29:     int hours = 5;
+  - Operational run time: 5 hours.
+
+Line 30:     public void turnOn() { on = true; }
+  - Turns AC ON.
+
+Line 31:     public void turnOff() { on = false; }
+  - Turns AC OFF.
+
+Line 32:     public void displayStatus() { System.out.println("AC: " + (on ? "ON" : "OFF")); }
+  - Displays AC status.
+
+Line 33:     public double calculatePowerConsumption() { return on ? (1500 * hours) / 1000.0 : 0; }
+  - 1500 Watts * 5 hours / 1000 = 7.5 kWh when ON; 0 when OFF.
+
+Line 34: }
+  - Closes SmartAC class.
+
+Line 35: (Blank line)
+
+Line 36: class Main {
+  - Driver class.
+
+Line 37:     public static void main(String[] args) {
+  - Main method.
+
+Line 38:         SmartDevice[] d = { new SmartLight(), new SmartFan(), new SmartAC() };
+  - Array of SmartDevice references containing all 3 device instances.
+
+Line 39:         for (SmartDevice dev : d) {
+  - For-each loop through device array.
+
+Line 40:             dev.turnOn();
+  - Powers on device.
+
+Line 41:             dev.displayStatus();
+  - Displays status ("ON").
+
+Line 42:             System.out.println("Power: " + ((EnergyMonitor) dev).calculatePowerConsumption() + " kWh");
+  - Interface casting: Casts SmartDevice reference 'dev' to 'EnergyMonitor' to invoke calculatePowerConsumption().
+
+Line 43:         }
+  - Closes loop.
+
+Line 44:     }
+  - Closes main().
+
+Line 45: }
+  - Closes Main class.

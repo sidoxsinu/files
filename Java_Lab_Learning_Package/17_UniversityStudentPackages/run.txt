@@ -1,0 +1,2 @@
+javac -d . Student.java ResearchStudent.java Admin.java
+java college.admin.Admin

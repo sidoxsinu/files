@@ -1,0 +1,6 @@
+1. Start.
+2. In hospital.patient, create Patient with private recordNo, protected treatment, public name.
+3. In hospital.staff, create InPatient and EmergencyPatient extending Patient.
+4. Calculate bills using inherited protected treatment field.
+5. In main(), create patients, add charges, and display bills and secure record numbers via getter.
+6. Stop.

@@ -1,0 +1,189 @@
+================================================================================
+PROGRAM 07: VEHICLE INSURANCE MULTILEVEL INHERITANCE
+FILE: ElectricCar.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Implement multilevel inheritance for vehicle insurance calculation:
+- Base class: Vehicle (regNo, owner, value)
+- Intermediate class: Car (premium = 5% of vehicle value) extends Vehicle
+- Derived class: ElectricCar (battery capacity, battery insurance) extends Car
+Compute and display total insurance premium.
+
+================================================================================
+COMPLETE SOURCE CODE (ElectricCar.java)
+================================================================================
+1: class Vehicle {
+2:     String regNo, owner;
+3:     double value;
+4: 
+5:     Vehicle(String r, String o, double v) {
+6:         regNo = r;
+7:         owner = o;
+8:         value = v;
+9:     }
+10: }
+11: 
+12: class Car extends Vehicle {
+13:     double premium;
+14: 
+15:     Car(String r, String o, double v) {
+16:         super(r, o, v);
+17:         premium = value * 0.05;
+18:     }
+19: }
+20: 
+21: class ElectricCar extends Car {
+22:     int battery;
+23: 
+24:     ElectricCar(String r, String o, double v, int b) {
+25:         super(r, o, v);
+26:         battery = b;
+27:     }
+28: 
+29:     void display() {
+30:         double batteryCharge = battery * 100;
+31:         double total = premium + batteryCharge;
+32:         System.out.println("Reg No: " + regNo);
+33:         System.out.println("Owner: " + owner);
+34:         System.out.println("Value: " + value);
+35:         System.out.println("Basic Premium: " + premium);
+36:         System.out.println("Battery Insurance: " + batteryCharge);
+37:         System.out.println("Total Premium: " + total);
+38:     }
+39: 
+40:     public static void main(String[] args) {
+41:         ElectricCar e = new ElectricCar("KL01AB1234", "Arun", 500000, 50);
+42:         e.display();
+43:     }
+44: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: class Vehicle {
+  - Base class representing general vehicle information.
+
+Line 2:     String regNo, owner;
+  - 'regNo': Registration number (e.g. "KL01AB1234").
+  - 'owner': Name of vehicle owner.
+
+Line 3:     double value;
+  - Market value of the vehicle.
+
+Line 4: (Blank line)
+
+Line 5:     Vehicle(String r, String o, double v) {
+  - Vehicle constructor initializing registration number, owner, and value.
+
+Line 6:         regNo = r;
+  - Sets registration number.
+
+Line 7:         owner = o;
+  - Sets owner name.
+
+Line 8:         value = v;
+  - Sets vehicle value.
+
+Line 9:     }
+  - Closes Vehicle constructor.
+
+Line 10: }
+  - Closes Vehicle class.
+
+Line 11: (Blank line)
+
+Line 12: class Car extends Vehicle {
+  - Middle class Car inheriting from Vehicle.
+
+Line 13:     double premium;
+  - Insurance premium field for cars.
+
+Line 14: (Blank line)
+
+Line 15:     Car(String r, String o, double v) {
+  - Car constructor.
+
+Line 16:         super(r, o, v);
+  - Passes registration number, owner, and value to Vehicle constructor using super().
+
+Line 17:         premium = value * 0.05;
+  - Computes 5% insurance premium on vehicle value.
+
+Line 18:     }
+  - Closes Car constructor.
+
+Line 19: }
+  - Closes Car class.
+
+Line 20: (Blank line)
+
+Line 21: class ElectricCar extends Car {
+  - Child class ElectricCar inheriting from Car (multilevel inheritance).
+
+Line 22:     int battery;
+  - Battery capacity in kilowatt-hours (kWh).
+
+Line 23: (Blank line)
+
+Line 24:     ElectricCar(String r, String o, double v, int b) {
+  - ElectricCar constructor accepting vehicle data and battery capacity.
+
+Line 25:         super(r, o, v);
+  - Calls Car constructor to initialize vehicle details and basic 5% premium.
+
+Line 26:         battery = b;
+  - Sets battery capacity.
+
+Line 27:     }
+  - Closes ElectricCar constructor.
+
+Line 28: (Blank line)
+
+Line 29:     void display() {
+  - Computes battery insurance and prints the total premium breakdown.
+
+Line 30:         double batteryCharge = battery * 100;
+  - Calculates battery insurance surcharge at Rs. 100 per kWh of battery capacity.
+
+Line 31:         double total = premium + batteryCharge;
+  - Sums basic car premium (5%) and battery surcharge.
+
+Line 32:         System.out.println("Reg No: " + regNo);
+  - Prints registration number.
+
+Line 33:         System.out.println("Owner: " + owner);
+  - Prints owner name.
+
+Line 34:         System.out.println("Value: " + value);
+  - Prints vehicle valuation.
+
+Line 35:         System.out.println("Basic Premium: " + premium);
+  - Prints basic premium (500000 * 0.05 = 25000.0).
+
+Line 36:         System.out.println("Battery Insurance: " + batteryCharge);
+  - Prints battery charge (50 * 100 = 5000.0).
+
+Line 37:         System.out.println("Total Premium: " + total);
+  - Prints total premium (25000 + 5000 = 30000.0).
+
+Line 38:     }
+  - Closes display() method.
+
+Line 39: (Blank line)
+
+Line 40:     public static void main(String[] args) {
+  - Program entry point.
+
+Line 41:         ElectricCar e = new ElectricCar("KL01AB1234", "Arun", 500000, 50);
+  - Creates ElectricCar object with reg "KL01AB1234", Arun, value 500,000, battery 50 kWh.
+
+Line 42:         e.display();
+  - Invokes display() to present complete insurance details.
+
+Line 43:     }
+  - Closes main method.
+
+Line 44: }
+  - Closes ElectricCar class.

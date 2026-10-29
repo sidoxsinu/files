@@ -1,0 +1,254 @@
+================================================================================
+PROGRAM 14: TRANSPORT FARE ABSTRACT CLASS
+FILE: Main.java
+================================================================================
+
+[PROBLEM STATEMENT]
+Create an abstract class Transport with vehicle number, distance, and passengers.
+Abstract method: calculateFare().
+Implement subclasses:
+- Bus: distance * passengers * 2
+- Taxi: (distance * 15) + (passengers * 50) + 100 booking fee
+- ElectricVehicle: (distance * 8) + (passengers * 20) + 50 base fee
+Demonstrate dynamic fare calculation for all modes of transport.
+
+================================================================================
+COMPLETE SOURCE CODE (Main.java)
+================================================================================
+1: abstract class Transport {
+2:     String no;
+3:     double dist;
+4:     int pass;
+5: 
+6:     Transport(String no, double dist, int pass) {
+7:         this.no = no;
+8:         this.dist = dist;
+9:         this.pass = pass;
+10:     }
+11: 
+12:     abstract double calculateFare();
+13: 
+14:     void display() {
+15:         System.out.println(no + " Fare: " + calculateFare());
+16:     }
+17: }
+18: 
+19: class Bus extends Transport {
+20:     Bus(String no, double dist, int pass) {
+21:         super(no, dist, pass);
+22:     }
+23: 
+24:     double calculateFare() {
+25:         return dist * pass * 2;
+26:     }
+27: }
+28: 
+29: class Taxi extends Transport {
+30:     Taxi(String no, double dist, int pass) {
+31:         super(no, dist, pass);
+32:     }
+33: 
+34:     double calculateFare() {
+35:         return (dist * 15) + (pass * 50) + 100;
+36:     }
+37: }
+38: 
+39: class ElectricVehicle extends Transport {
+40:     ElectricVehicle(String no, double dist, int pass) {
+41:         super(no, dist, pass);
+42:     }
+43: 
+44:     double calculateFare() {
+45:         return (dist * 8) + (pass * 20) + 50;
+46:     }
+47: }
+48: 
+49: class Main {
+50:     public static void main(String[] args) {
+51:         Transport[] t = {
+52:             new Bus("Bus-101", 10, 20),
+53:             new Taxi("Taxi-202", 10, 2),
+54:             new ElectricVehicle("EV-303", 10, 2)
+55:         };
+56: 
+57:         for (Transport tr : t) {
+58:             tr.display();
+59:         }
+60:     }
+61: }
+
+================================================================================
+LINE-BY-LINE EXPLANATION
+================================================================================
+
+Line 1: abstract class Transport {
+  - Abstract base class for transportation modes.
+
+Line 2:     String no;
+  - Vehicle identification / registration number.
+
+Line 3:     double dist;
+  - Distance traveled in kilometers.
+
+Line 4:     int pass;
+  - Passenger count.
+
+Line 5: (Blank line)
+
+Line 6:     Transport(String no, double dist, int pass) {
+  - Constructor for Transport class.
+
+Line 7:         this.no = no;
+  - Initializes vehicle number.
+
+Line 8:         this.dist = dist;
+  - Initializes distance.
+
+Line 9:         this.pass = pass;
+  - Initializes passenger count.
+
+Line 10:    }
+  - Closes constructor.
+
+Line 11: (Blank line)
+
+Line 12:    abstract double calculateFare();
+  - Abstract method requiring subclasses to calculate trip fare.
+
+Line 13: (Blank line)
+
+Line 14:    void display() {
+  - Prints vehicle number and calculated fare.
+
+Line 15:        System.out.println(no + " Fare: " + calculateFare());
+  - Dynamically invokes the specific calculateFare() of the runtime object.
+
+Line 16:    }
+  - Closes display().
+
+Line 17: }
+  - Closes Transport class.
+
+Line 18: (Blank line)
+
+Line 19: class Bus extends Transport {
+  - Subclass for Bus transport.
+
+Line 20:     Bus(String no, double dist, int pass) {
+  - Bus constructor.
+
+Line 21:         super(no, dist, pass);
+  - Calls Transport constructor.
+
+Line 22:     }
+  - Closes constructor.
+
+Line 23: (Blank line)
+
+Line 24:    double calculateFare() {
+  - Implements calculateFare() for Bus.
+
+Line 25:        return dist * pass * 2;
+  - Bus fare: distance * passengers * Rs. 2 per km-passenger.
+
+Line 26:    }
+  - Closes calculateFare().
+
+Line 27: }
+  - Closes Bus class.
+
+Line 28: (Blank line)
+
+Line 29: class Taxi extends Transport {
+  - Subclass for Taxi transport.
+
+Line 30:     Taxi(String no, double dist, int pass) {
+  - Taxi constructor.
+
+Line 31:         super(no, dist, pass);
+  - Calls Transport constructor.
+
+Line 32:     }
+  - Closes constructor.
+
+Line 33: (Blank line)
+
+Line 34:    double calculateFare() {
+  - Implements calculateFare() for Taxi.
+
+Line 35:        return (dist * 15) + (pass * 50) + 100;
+  - Taxi fare: (distance * 15) + (passengers * 50) + Rs. 100 base booking fee.
+
+Line 36:    }
+  - Closes calculateFare().
+
+Line 37: }
+  - Closes Taxi class.
+
+Line 38: (Blank line)
+
+Line 39: class ElectricVehicle extends Transport {
+  - Subclass for Electric Vehicle (EV) transport.
+
+Line 40:     ElectricVehicle(String no, double dist, int pass) {
+  - ElectricVehicle constructor.
+
+Line 41:         super(no, dist, pass);
+  - Calls Transport constructor.
+
+Line 42:     }
+  - Closes constructor.
+
+Line 43: (Blank line)
+
+Line 44:    double calculateFare() {
+  - Implements calculateFare() for EV.
+
+Line 45:        return (dist * 8) + (pass * 20) + 50;
+  - EV fare: (distance * 8) + (passengers * 20) + Rs. 50 base fee.
+
+Line 46:    }
+  - Closes calculateFare().
+
+Line 47: }
+  - Closes ElectricVehicle class.
+
+Line 48: (Blank line)
+
+Line 49: class Main {
+  - Driver class.
+
+Line 50:     public static void main(String[] args) {
+  - Program entry point.
+
+Line 51:         Transport[] t = {
+  - Array of Transport references.
+
+Line 52:             new Bus("Bus-101", 10, 20),
+  - Bus: 10 * 20 * 2 = 400.0.
+
+Line 53:             new Taxi("Taxi-202", 10, 2),
+  - Taxi: (10 * 15) + (2 * 50) + 100 = 150 + 100 + 100 = 350.0.
+
+Line 54:             new ElectricVehicle("EV-303", 10, 2)
+  - EV: (10 * 8) + (2 * 20) + 50 = 80 + 40 + 50 = 170.0.
+
+Line 55:         };
+  - Closes array.
+
+Line 56: (Blank line)
+
+Line 57:         for (Transport tr : t) {
+  - Loops through all transport objects.
+
+Line 58:             tr.display();
+  - Polymorphically outputs fare for each transport mode.
+
+Line 59:         }
+  - Closes loop.
+
+Line 60:     }
+  - Closes main().
+
+Line 61: }
+  - Closes Main class.
